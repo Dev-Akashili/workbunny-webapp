@@ -19,7 +19,7 @@ export const AuthRoute = ({
   }, []);
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth" replace />;
+    return <Navigate to="/auth?page=login" replace />;
   }
 
   return children || <Outlet />;

@@ -12,14 +12,14 @@ export const LogIn = () => {
         placeholder="Email"
         isRequired
       />
-      <FormPasswordInput />
-      <FormLink link="Forgot Password?" to="" />
+      <FormPasswordInput name="password" />
+      <FormLink link="Forgot Password?" to="/auth?page=forgot-password" />
       <FormButton name="Submit" />
       <HStack spacing={3}>
         <Text color="gray" size="lg">
           Don't have an account?
         </Text>
-        <FormLink link="Register" to="" />
+        <FormLink link="Register" to="/auth?page=register" />
       </HStack>
     </FormLayout>
   );

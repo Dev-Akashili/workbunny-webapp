@@ -33,8 +33,8 @@ export const FormInput = ({
 }: FormInputProps) => {
   return (
     <FormControl>
-      <FormLabel>{label}</FormLabel>
-      <InputGroup size="lg">
+      <FormLabel fontWeight="bold">{label}</FormLabel>
+      <InputGroup size="md">
         <Input
           name={name}
           type={type}
@@ -47,22 +47,40 @@ export const FormInput = ({
   );
 };
 
-export const FormPasswordInput = () => {
+export const FormPasswordInput = ({
+  name,
+  prefix,
+}: {
+  name: "password" | "confirm";
+  prefix?: string;
+}) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   return (
     <FormControl>
-      <FormLabel>Password</FormLabel>
-      <InputGroup size="lg">
+      <FormLabel fontWeight="bold">
+        {name === "password"
+          ? prefix
+            ? `${prefix} Password`
+            : "Password"
+          : "Confirm Password"}
+      </FormLabel>
+      <InputGroup size="md">
         <Input
-          name="password"
-          placeholder="Password"
+          name={name}
+          placeholder={
+            name === "password"
+              ? prefix
+                ? `${prefix} Password`
+                : "Password"
+              : "Confirm Password"
+          }
           type={show ? "text" : "password"}
           border="1px solid"
           required
         />
-        <InputRightElement>
+        <InputRightElement mr="5px">
           <Button variant="ghost" size="sm" onClick={handleClick}>
             {show ? <Eye /> : <EyeOff />}
           </Button>
@@ -88,7 +106,7 @@ export const FormButton = ({ name, isLoading, ...p }: FormButtonProps) => {
       }}
       type="submit"
       isLoading={isLoading}
-      size="lg"
+      size="md"
       {...p}
     >
       {name}

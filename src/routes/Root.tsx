@@ -10,7 +10,7 @@ const IndexRedirect = () => {
   const user: boolean = true;
   const navigate = useNavigate();
   useEffect(() => {
-    const path = user ? "/auth" : "/home";
+    const path = user ? "/auth?page=login" : "/home";
     navigate(path, { replace: true });
   }, [user, navigate]);
   return null;

@@ -4,32 +4,29 @@ import { FormButton, FormInput, FormLink, FormPasswordInput } from "./Index";
 import { useState } from "react";
 import { CornfirmEmail } from "./ConfirmEmail";
 
-export const ResetPassword = () => {
+export const Register = () => {
   const [isCodeSent] = useState<boolean>(false);
 
   return (
     <>
       {isCodeSent ? (
-        <CornfirmEmail name="reset" />
+        <CornfirmEmail name="register" />
       ) : (
-        <FormLayout
-          title="Reset your password"
-          description="Use the verification code sent to your email"
-        >
+        <FormLayout title="Create a new account">
           <FormInput
-            name="code"
-            type="text"
-            label="Code"
-            placeholder="Your verification code"
+            name="email"
+            type="email"
+            label="Email"
+            placeholder="Email"
             isRequired
           />
-          <FormPasswordInput prefix="New" name="password" />
-          <FormPasswordInput prefix="New" name="confirm" />
+          <FormPasswordInput name="password" />
+          <FormPasswordInput name="confirm" />
           <Box></Box>
           <FormButton name="Submit" />
-          <HStack spacing={2}>
+          <HStack spacing={3}>
             <Text color="gray" size="lg">
-              Return back to
+              Already have an account?
             </Text>
             <FormLink link="Login" to="/auth?page=login" />
           </HStack>

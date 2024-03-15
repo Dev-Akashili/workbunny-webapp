@@ -3,10 +3,15 @@ import { ReactNode } from "react";
 
 interface FormLayoutProps {
   title: string;
+  description?: string;
   children: ReactNode | ReactNode[];
 }
 
-export const FormLayout = ({ title, children }: FormLayoutProps) => {
+export const FormLayout = ({
+  title,
+  description,
+  children,
+}: FormLayoutProps) => {
   return (
     <VStack spacing={5} w="450px">
       <Image
@@ -26,6 +31,11 @@ export const FormLayout = ({ title, children }: FormLayoutProps) => {
         <Text fontSize="2xl" fontWeight="extrabold" color="#2631c3">
           {title}
         </Text>
+        {description && (
+          <Text fontSize="md" fontWeight="extrabold" color="gray">
+            {description}
+          </Text>
+        )}
         {children}
       </VStack>
     </VStack>
