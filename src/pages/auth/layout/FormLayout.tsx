@@ -1,17 +1,41 @@
-import { Image, Text, VStack } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  CloseButton,
+  Image,
+  Text,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { ReactNode, useEffect } from "react";
+
+export interface AlertObject {
+  status: "info" | "warning" | "success" | "error" | "loading" | undefined;
+  title: string;
+  description?: ReactNode | ReactNode[];
+}
 
 interface FormLayoutProps {
   title: string;
   description?: string;
   children: ReactNode | ReactNode[];
+  alert?: AlertObject | undefined;
 }
 
 export const FormLayout = ({
   title,
   description,
   children,
+  alert,
 }: FormLayoutProps) => {
+  const showAlert =
+    alert !== null &&
+    alert !== undefined &&
+    alert &&
+    Object.keys(alert).length > 0;
+
   return (
     <VStack spacing={5} w="450px">
       <Image
@@ -36,8 +60,53 @@ export const FormLayout = ({
             {description}
           </Text>
         )}
+        {showAlert && (
+          <FormAlert
+            status={alert.status}
+            title={alert.title}
+            description={alert.description}
+          />
+        )}
         {children}
       </VStack>
     </VStack>
   );
+};
+
+interface FormAlertProps {
+  status: "info" | "warning" | "success" | "error" | "loading" | undefined;
+  title: string;
+  description?: ReactNode | ReactNode[];
+}
+const FormAlert = ({ status, title, description }: FormAlertProps) => {
+  const {
+    isOpen: isVisible,
+    onOpen,
+    onClose,
+  } = useDisclosure({ defaultIsOpen: true });
+
+  useEffect(() => {
+    onOpen();
+  }, [status, title, onOpen]);
+
+  return isVisible ? (
+    <Alert status={status}>
+      <AlertIcon />
+      {description ? (
+        <VStack alignItems="left">
+          <AlertTitle>{title}</AlertTitle>
+          <AlertDescription>{description}</AlertDescription>
+        </VStack>
+      ) : (
+        <AlertTitle>{title}</AlertTitle>
+      )}
+      <CloseButton
+        alignSelf="flex-start"
+        position="relative"
+        ml="auto"
+        top={-1}
+        onClick={onClose}
+      />
+    </Alert>
+  ) : null;
 };

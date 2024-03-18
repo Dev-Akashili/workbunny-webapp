@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Register } from "./components/Register";
 import { ResetPassword } from "./components/ResetPassword";
 import { Error } from "./components/Error";
+import { VerifyEmail } from "./components/VerifyEmail";
 
 export const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -24,6 +25,9 @@ export const Auth = () => {
         break;
       case "forgot-password":
         return <ResetPassword />;
+        break;
+      case "verify-email":
+        return <VerifyEmail />;
         break;
       default:
         return <Error />;
