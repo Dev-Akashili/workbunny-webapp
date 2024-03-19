@@ -1,19 +1,20 @@
 import { Busy } from "@/components/Busy";
 import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 import { Auth } from "@/pages/auth/Auth";
+import { Forbidden } from "@/pages/error/Forbidden";
 import { NotFound } from "@/pages/error/NotFound";
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 export const IndexRoute = () => {
   const { pathname } = useLocation();
-  const isLoggedIn = useAuthentication();
+  const { isAuthenticated } = useAuthentication();
 
-  if (isLoggedIn === undefined) {
-    return <Busy />;
+  if (isAuthenticated === undefined) {
+    return <Busy isCentered />
   }
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return <Navigate to="/auth?page=login" replace />;
   }
 
@@ -25,13 +26,13 @@ export const AuthRoute = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const isLoggedIn = useAuthentication();
+  const { isAuthenticated } = useAuthentication();
 
-  if (isLoggedIn === undefined) {
-    return <Busy />;
+  if (isAuthenticated === undefined) {
+    return <Busy isCentered />
   }
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return <Navigate to="/auth?page=login" replace />;
   }
 
@@ -39,15 +40,37 @@ export const AuthRoute = ({
 };
 
 export const AuthRedirect = () => {
-  const isLoggedIn = useAuthentication();
+  const { isAuthenticated } = useAuthentication();
 
-  if (isLoggedIn === undefined) {
-    return <Busy />;
+  if (isAuthenticated === undefined) {
+    return <Busy isCentered />
   }
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return <Auth />;
   }
 
   return <NotFound />;
+};
+
+export const AdminRoute = ({
+  children,
+}: {
+  children: ReactNode | ReactNode[];
+}) => {
+  const { isAuthenticated, roles } = useAuthentication();
+
+  if (isAuthenticated === undefined) {
+    return <Busy isCentered />
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth?page=login" replace />;
+  }
+
+  if (!roles.includes("Admin")) {
+    return <Forbidden />;
+  }
+
+  return children;
 };

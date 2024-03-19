@@ -3,7 +3,7 @@ import { LogIn } from "./components/LogIn";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Register } from "./components/Register";
-import { ResetPassword } from "./components/ResetPassword";
+import { ForgotPassword } from "./components/ForgotPassword";
 import { VerifyEmail } from "./components/VerifyEmail";
 
 export const Auth = () => {
@@ -23,7 +23,7 @@ export const Auth = () => {
         return <Register />;
         break;
       case "forgot-password":
-        return <ResetPassword />;
+        return <ForgotPassword />;
         break;
       case "verify-email":
         return <VerifyEmail />;

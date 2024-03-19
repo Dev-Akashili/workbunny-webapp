@@ -1,7 +1,7 @@
-import { Image } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-export const Busy = () => {
+const AnimatedLogo = () => {
   return (
     <motion.div
       animate={{ scale: [1, 1.5, 1] }}
@@ -14,5 +14,24 @@ export const Busy = () => {
         h="50px"
       />
     </motion.div>
+  );
+};
+
+export const Busy = ({ isCentered = false }: { isCentered?: boolean }) => {
+  return (
+    <>
+      {isCentered ? (
+        <Flex
+          minH="100vh"
+          justifyContent="center"
+          alignItems="center"
+          bgImage="linear-gradient(to bottom right, #fff, #dce1fc, #fff,  #fff)"
+        >
+          <AnimatedLogo />
+        </Flex>
+      ) : (
+        <AnimatedLogo />
+      )}
+    </>
   );
 };
