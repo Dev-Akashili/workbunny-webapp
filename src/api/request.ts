@@ -7,16 +7,14 @@ interface RequestOptions {
 
 const apiUrl = import.meta.env.VITE_API_LOCAL_URL;
 
-export const request = async <T>(
-  url: string,
-  options: RequestOptions = {}
-): Promise<T> => {
+export const request = async <T>(url: string, options: RequestOptions = {}) => {
   const response = await fetch(
     options.identity ? `${apiUrl}/${url}` : `${apiUrl}/api/v1/${url}`,
     {
       method: options.method,
       headers: options.headers,
       body: options.body,
+      credentials: "include",
     }
   );
 
@@ -24,5 +22,19 @@ export const request = async <T>(
     return {} as T;
   }
 
-  return response.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isJson = (response: any) => {
+    try {
+      JSON.parse(response);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  if (isJson(response)) {
+    return response.json();
+  }
+
+  return response;
 };

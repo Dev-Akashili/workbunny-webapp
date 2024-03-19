@@ -1,8 +1,11 @@
-import { AuthResponse } from "@/types";
 import { request } from "./request";
 
+const fetchKeys = {
+  login: "login?useCookies=true&useSessionCookies=true",
+};
+
 export async function register(formData: { email: string; password: string }) {
-  return await request<AuthResponse>("register", {
+  return await request("register", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -13,7 +16,7 @@ export async function register(formData: { email: string; password: string }) {
 }
 
 export async function login(formData: { email: string; password: string }) {
-  return await request<AuthResponse>("login", {
+  return await request(fetchKeys.login, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

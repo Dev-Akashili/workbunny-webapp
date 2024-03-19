@@ -19,20 +19,22 @@ export const LogIn = () => {
     setIsLoading(true);
     setAlert(undefined);
     const { email, password } = getFormData(e, ["email", "password"]);
+
     try {
       const result = await login({ email, password });
       if (result.status === 200) {
         setIsLoading(false);
         navigate("/home");
         toast({
-          title: "Login successfull!",
+          title: "Login successful",
           status: "success",
           duration: 5000,
           isClosable: true,
           position: "top",
         });
       } else {
-        const result = await custom({ email: email, password: password });
+        const request = await custom({ email: email, password: password });
+        const result = await request.json();
         setAlert({
           status: result.name,
           title: result.message,

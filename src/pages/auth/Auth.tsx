@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Register } from "./components/Register";
 import { ResetPassword } from "./components/ResetPassword";
-import { Error } from "./components/Error";
 import { VerifyEmail } from "./components/VerifyEmail";
 
 export const Auth = () => {
@@ -30,7 +29,7 @@ export const Auth = () => {
         return <VerifyEmail />;
         break;
       default:
-        return <Error />;
+        return <LogIn />;
         break;
     }
   };

@@ -1,39 +1,31 @@
-import { Suspense, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { Auth } from "../pages/auth/Auth";
-import { Home } from "../pages/home/Home";
-import { AuthRoute } from "../layout/AuthRoute";
-import { Busy } from "../components/Busy";
-import { NotFound } from "../pages/error/NotFound";
-
-const IndexRedirect = () => {
-  const user: boolean = true;
-  const navigate = useNavigate();
-  useEffect(() => {
-    const path = user ? "/auth?page=login" : "/home";
-    navigate(path, { replace: true });
-  }, [user, navigate]);
-  return null;
-};
+import { Route, Routes } from "react-router-dom";
+import { Home } from "@/pages/home/Home";
+import { IndexRoute, AuthRoute, AuthRedirect } from "@/routes/Custom";
+import { NotFound } from "@/pages/error/NotFound";
 
 export const Root = () => {
   return (
     <Routes>
       <Route path="/">
-        <Route index element={<IndexRedirect />} />
-        <Route path="auth" element={<Auth />} />
+        <Route index element={<IndexRoute />} />
+        <Route path="auth" element={<AuthRedirect />} />
       </Route>
       <Route
         path="/home"
         element={
-          <Suspense fallback={<Busy />}>
-            <AuthRoute>
-              <Home />
-            </AuthRoute>
-          </Suspense>
+          <AuthRoute>
+            <Home />
+          </AuthRoute>
         }
       />
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="*"
+        element={
+          <AuthRoute>
+            <NotFound />
+          </AuthRoute>
+        }
+      />
     </Routes>
   );
 };

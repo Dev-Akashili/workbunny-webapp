@@ -1,8 +1,8 @@
-import { UserModel } from "../types";
+import { UserModel } from "@/types";
 import { request } from "./request";
 
 const fetchKeys = { getUser: "user" };
 
-export async function getUser() {
+export async function getUser(): Promise<Response> {
   return await request<UserModel>(fetchKeys.getUser);
 }

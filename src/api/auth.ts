@@ -1,4 +1,3 @@
-import { APIResult } from "../types";
 import { request } from "./request";
 
 const fetchKeys = {
@@ -6,7 +5,7 @@ const fetchKeys = {
 };
 
 export async function login(formData: { email: string; password: string }) {
-  return await request<APIResult>(fetchKeys.login, {
+  return await request(fetchKeys.login, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

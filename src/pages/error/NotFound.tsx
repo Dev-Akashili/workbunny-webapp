@@ -1,9 +1,11 @@
+import { PageLayout } from "@/layout/PageLayout";
 import { Flex, Image, Text, VStack } from "@chakra-ui/react";
 
 export const NotFound = () => {
   return (
-      <Flex h="100%" justifyContent="center" alignItems="center">
-        <VStack spacing="50px">
+    <PageLayout>
+      <Flex height="65vh" justifyContent="center" alignItems="center">
+        <VStack spacing="25px">
           <Image />
           <Text fontSize="100px" fontWeight="bold" color="#2631c3">
             404
@@ -12,9 +14,10 @@ export const NotFound = () => {
             Page Not Found
           </Text>
           <Text fontSize="18px" color="gray.400">
-            Oops! It seems like you've stumbled a page that doesn't exist.
+            Oops! It seems like you've stumbled on a page that doesn't exist.
           </Text>
         </VStack>
       </Flex>
+    </PageLayout>
   );
 };
