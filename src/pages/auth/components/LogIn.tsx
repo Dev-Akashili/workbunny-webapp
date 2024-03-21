@@ -42,7 +42,7 @@ export const LogIn = () => {
             <>
               Follow the link sent to your email or click
               <a
-                href="http://localhost:5173/auth?page=verify-email"
+                href={`http://localhost:5173/auth?page=verify-email&name=register&email=${email}`}
                 target="_blank"
                 style={{
                   textDecoration: "underline",
