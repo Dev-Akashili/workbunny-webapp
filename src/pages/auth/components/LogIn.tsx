@@ -1,18 +1,18 @@
 import { HStack, Text, useToast } from "@chakra-ui/react";
 import { AlertObject, FormLayout } from "../layout/FormLayout";
 import { FormButton, FormInput, FormLink, FormPasswordInput } from "./Index";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { getFormData } from "@/utils";
 import { login } from "@/api/identity";
-import * as reactRouterDom from "react-router-dom";
 import { login as custom } from "@/api/auth";
+import { AUTH_ROUTES, ROUTES } from "@/pages/routes";
+import { useNavigate } from "react-router-dom";
 
 export const LogIn = () => {
-  const toast = useToast();
-  const navigate = reactRouterDom.useNavigate();
-  const form = useRef<HTMLFormElement | null>(null);
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alert, setAlert] = useState<AlertObject | undefined>(undefined);
+  const toast = useToast({ duration: 5000, isClosable: true, position: "top" });
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,13 +24,10 @@ export const LogIn = () => {
       const result = await login({ email, password });
       if (result.status === 200) {
         setIsLoading(false);
-        navigate("/home");
+        navigate(ROUTES.home);
         toast({
           title: "Login successful",
           status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
         });
       } else {
         const request = await custom({ email: email, password: password });
@@ -42,7 +39,7 @@ export const LogIn = () => {
             <>
               Follow the link sent to your email or click
               <a
-                href={`http://localhost:5173/auth?page=verify-email&name=register&email=${email}`}
+                href={AUTH_ROUTES.verifyEmail.regiser(email)}
                 target="_blank"
                 style={{
                   textDecoration: "underline",
@@ -64,16 +61,13 @@ export const LogIn = () => {
       toast({
         title: "Network error!",
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
       });
       setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleLogin} ref={form}>
+    <form onSubmit={handleLogin}>
       <FormLayout title="Login to your account" alert={alert}>
         <FormInput
           name="email"
@@ -83,13 +77,13 @@ export const LogIn = () => {
           isRequired
         />
         <FormPasswordInput name="password" />
-        <FormLink link="Forgot Password?" to="/auth?page=forgot-password" />
+        <FormLink link="Forgot Password?" to={AUTH_ROUTES.forgotPasword} />
         <FormButton name="Submit" isLoading={isLoading} />
         <HStack spacing={3}>
           <Text color="gray" size="lg">
             Don't have an account?
           </Text>
-          <FormLink link="Register" to="/auth?page=register" />
+          <FormLink link="Register" to={AUTH_ROUTES.register} />
         </HStack>
       </FormLayout>
     </form>

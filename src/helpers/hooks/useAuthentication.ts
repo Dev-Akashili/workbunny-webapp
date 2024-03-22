@@ -4,19 +4,23 @@ import { useCallback, useEffect, useState } from "react";
 
 export const useAuthentication = (): {
   isAuthenticated: boolean | undefined;
-  roles: string[];
+  user: UserModel | null;
 } => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | undefined>(
     undefined
   );
-  const [roles, setRoles] = useState<string[]>([]);
+  const [user, setUser] = useState<UserModel | null>(null);
 
   const authenticate = useCallback(async () => {
     try {
       const response = await getUser();
       const user: UserModel = await response.json();
-      setIsAuthenticated(response.status === 200);
-      setRoles(user.roles);
+      if (response.status === 200) {
+        setIsAuthenticated(true);
+        setUser(user);
+      } else {
+        setIsAuthenticated(false);
+      }
     } catch (error) {
       setIsAuthenticated(false);
     }
@@ -26,5 +30,5 @@ export const useAuthentication = (): {
     authenticate();
   }, [authenticate]);
 
-  return { isAuthenticated, roles };
+  return { isAuthenticated, user };
 };

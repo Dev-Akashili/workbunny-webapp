@@ -2,6 +2,7 @@ import { request } from "./request";
 
 const fetchKeys = {
   login: "account/login",
+  register: "account/register",
   verifyEmail: "account/verifyEmail",
   sendEmailVerificationEmail: (email: string, name: string) =>
     `account/sendEmailVerificationLink?email=${email}&name=${name}`,
@@ -9,6 +10,16 @@ const fetchKeys = {
 
 export async function login(formData: { email: string; password: string }) {
   return await request(fetchKeys.login, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(formData),
+    identity: false,
+  });
+}
+export async function register(formData: { email: string; username: string }) {
+  return await request(fetchKeys.register, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

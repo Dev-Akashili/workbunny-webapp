@@ -14,6 +14,7 @@ import { ReactNode, useEffect } from "react";
 export interface AlertObject {
   status: "info" | "warning" | "success" | "error" | "loading" | undefined;
   title: string;
+  errors?: string[];
   description?: ReactNode | ReactNode[];
 }
 
@@ -65,6 +66,7 @@ export const FormLayout = ({
             status={alert.status}
             title={alert.title}
             description={alert.description}
+            errors={alert.errors}
           />
         )}
         {children}
@@ -76,9 +78,10 @@ export const FormLayout = ({
 interface FormAlertProps {
   status: "info" | "warning" | "success" | "error" | "loading" | undefined;
   title: string;
-  description?: ReactNode | ReactNode[];
+  errors?: string[];
+  description?: string | ReactNode | ReactNode[];
 }
-const FormAlert = ({ status, title, description }: FormAlertProps) => {
+const FormAlert = ({ status, title, errors, description }: FormAlertProps) => {
   const {
     isOpen: isVisible,
     onOpen,
@@ -91,14 +94,35 @@ const FormAlert = ({ status, title, description }: FormAlertProps) => {
 
   return isVisible ? (
     <Alert status={status}>
-      <AlertIcon />
       {description ? (
-        <VStack alignItems="left">
-          <AlertTitle>{title}</AlertTitle>
-          <AlertDescription>{description}</AlertDescription>
-        </VStack>
+        <>
+          <AlertIcon mb="auto" />
+          <VStack alignItems="left">
+            <AlertTitle>{title}</AlertTitle>
+            <AlertDescription>{description}</AlertDescription>
+          </VStack>
+        </>
+      ) : errors ? (
+        <>
+          <AlertIcon mb="auto" />
+          <VStack alignItems="left">
+            <AlertTitle>{title}</AlertTitle>
+            {errors.length > 1 ? (
+              <ul>
+                {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            ) : (
+              <AlertDescription>{errors[0]}</AlertDescription>
+            )}
+          </VStack>
+        </>
       ) : (
-        <AlertTitle>{title}</AlertTitle>
+        <>
+          <AlertIcon />
+          <AlertTitle>{title}</AlertTitle>
+        </>
       )}
       <CloseButton
         alignSelf="flex-start"

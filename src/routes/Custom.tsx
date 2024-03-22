@@ -11,7 +11,7 @@ export const IndexRoute = () => {
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated === undefined) {
-    return <Busy isCentered />
+    return <Busy isCentered />;
   }
 
   if (!isAuthenticated) {
@@ -29,7 +29,7 @@ export const AuthRoute = ({
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated === undefined) {
-    return <Busy isCentered />
+    return <Busy isCentered />;
   }
 
   if (!isAuthenticated) {
@@ -43,7 +43,7 @@ export const AuthRedirect = () => {
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated === undefined) {
-    return <Busy isCentered />
+    return <Busy isCentered />;
   }
 
   if (!isAuthenticated) {
@@ -58,17 +58,17 @@ export const AdminRoute = ({
 }: {
   children: ReactNode | ReactNode[];
 }) => {
-  const { isAuthenticated, roles } = useAuthentication();
+  const { isAuthenticated, user } = useAuthentication();
 
   if (isAuthenticated === undefined) {
-    return <Busy isCentered />
+    return <Busy isCentered />;
   }
 
   if (!isAuthenticated) {
     return <Navigate to="/auth?page=login" replace />;
   }
 
-  if (!roles.includes("Admin")) {
+  if (!user?.roles.includes("Admin")) {
     return <Forbidden />;
   }
 
