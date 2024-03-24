@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Register } from "./components/Register";
 import { ForgotPassword } from "./components/ForgotPassword";
-import { VerifyEmail } from "./components/VerifyEmail";
+import { VerifyEmail } from "./components/verifyEmail/VerifyEmail";
 
 export const Auth = () => {
   const [searchParams] = useSearchParams();

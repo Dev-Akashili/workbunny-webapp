@@ -1,10 +1,5 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Button,
-  CloseButton,
   FormControl,
   FormLabel,
   Input,
@@ -111,28 +106,6 @@ export const FormButton = ({ name, isLoading, ...p }: FormButtonProps) => {
     >
       {name}
     </Button>
-  );
-};
-
-interface FormAlertProps {
-  message: string;
-  description: string;
-  status: "info" | "warning" | "success" | "error" | "loading" | undefined;
-}
-
-export const FormAlert = ({
-  status,
-  message,
-  description,
-  ...p
-}: FormAlertProps) => {
-  return (
-    <Alert status={status} variant="left-accent" {...p}>
-      <AlertIcon />
-      <AlertTitle>{message}</AlertTitle>
-      <AlertDescription>{description}</AlertDescription>
-      <CloseButton />
-    </Alert>
   );
 };
 
