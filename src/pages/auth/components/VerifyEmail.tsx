@@ -7,13 +7,15 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { FormLayout } from "../layout/FormLayout";
+import { AlertObject, FormLayout } from "../layout/FormLayout";
 import { useEffect, useState } from "react";
 import { FormButton, FormLink, FormPasswordInput } from "./Index";
 import { useSearchParams } from "react-router-dom";
 import { Busy } from "@/components/Busy";
-import { sendEmail, verifyEmail } from "@/api/auth";
+import { resetPassword, sendEmail, verifyEmail } from "@/api/auth";
 import { Error } from "./Error";
+import { getFormData } from "@/utils";
+import { AUTH_ROUTES } from "@/pages/routes";
 
 const EmailSent = ({ name }: { name: string | null }) => {
   return (
@@ -37,11 +39,17 @@ const EmailSent = ({ name }: { name: string | null }) => {
   );
 };
 
-const EmailVerified = () => {
+const EmailVerified = ({ name }: { name: string }) => {
   return (
     <FormLayout
-      title="Email successfully verified!"
-      description="You can now log in to your account."
+      title={
+        name === "register"
+          ? "Email successfully verified!"
+          : "Password successfully reset!"
+      }
+      description={
+        name === "register" ? "You can now log in to your account." : undefined
+      }
     >
       <Stack gap={5} alignItems="center">
         <Image
@@ -56,7 +64,7 @@ const EmailVerified = () => {
   );
 };
 
-const LinkExpired = ({ email }: { email: string }) => {
+const LinkExpired = ({ email, name }: { email: string; name: string }) => {
   return (
     <FormLayout
       title="This link has expired"
@@ -77,7 +85,11 @@ const LinkExpired = ({ email }: { email: string }) => {
           }}
           as={Link}
           size="md"
-          href={`auth?page=verify-email&name=register&email=${email}`}
+          href={
+            name === "register"
+              ? AUTH_ROUTES.verifyEmail.regiser(email)
+              : AUTH_ROUTES.forgotPasword
+          }
         >
           Send new verification link
         </Button>
@@ -92,19 +104,83 @@ interface ResetPasswordProps {
 
 const ResetPassword = ({ resetObj }: ResetPasswordProps) => {
   const { codeId, code, email } = resetObj;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isExpired, setIsExpired] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [alert, setAlert] = useState<AlertObject | undefined>(undefined);
+
+  const handleReset = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setAlert(undefined);
+    const { password, confirm } = getFormData(e, ["password", "confirm"]);
+
+    // Make sure passwords are the same
+    if (password !== confirm) {
+      setAlert({
+        status: "error",
+        title: "Passwords do not match!",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const request = await resetPassword({
+        codeId: codeId,
+        code: code,
+        email: email,
+        newPassword: password,
+      });
+      if (request.status === 200) {
+        setSuccess(true);
+        return;
+      } else if (request.status === 400) {
+        const errors = await request.json();
+        if (errors.errors === "expired") {
+          setIsExpired(true);
+          return;
+        } else {
+          setAlert({
+            status: "error",
+            title: "One or more validation errors occured",
+            errors: errors.errors,
+          });
+        }
+      }
+    } catch (error) {
+      console.warn("Password reset failed");
+      setAlert({
+        status: "error",
+        title: "Something went wrong! Please try again later.",
+      });
+    }
+    setIsLoading(false);
+  };
+
   return (
-    <FormLayout title="Reset your password">
-      <FormPasswordInput prefix="New" name="password" />
-      <FormPasswordInput prefix="New" name="confirm" />
-      <Box></Box>
-      <FormButton name="Submit" />
-      <HStack spacing={2}>
-        <Text color="gray" size="lg">
-          Return back to
-        </Text>
-        <FormLink link="Login" to="/auth?page=login" />
-      </HStack>
-    </FormLayout>
+    <>
+      {isExpired ? (
+        <LinkExpired email={email} name="reset" />
+      ) : success ? (
+        <EmailVerified name="reset" />
+      ) : (
+        <form onSubmit={handleReset}>
+          <FormLayout title="Reset your password" alert={alert}>
+            <FormPasswordInput prefix="New" name="password" />
+            <FormPasswordInput prefix="New" name="confirm" />
+            <Box></Box>
+            <FormButton name="Submit" isLoading={isLoading} />
+            <HStack spacing={2}>
+              <Text color="gray" size="lg">
+                Return back to
+              </Text>
+              <FormLink link="Login" to="/auth?page=login" />
+            </HStack>
+          </FormLayout>
+        </form>
+      )}
+    </>
   );
 };
 
@@ -206,10 +282,10 @@ export const VerifyEmail = () => {
         return <EmailSent name={name} />;
         break;
       case "verified":
-        return <EmailVerified />;
+        return <EmailVerified name="register" />;
         break;
       case "expired":
-        return <LinkExpired email={email} />;
+        return <LinkExpired name="register" email={email} />;
         break;
       case "reset-form":
         return <ResetPassword resetObj={resetObj} />;

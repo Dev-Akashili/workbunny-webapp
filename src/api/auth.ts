@@ -6,6 +6,7 @@ const fetchKeys = {
   verifyEmail: "account/verifyEmail",
   sendEmailVerificationEmail: (email: string, name: string) =>
     `account/sendEmailVerificationLink?email=${email}&name=${name}`,
+  resetPassword: "account/resetPassword",
 };
 
 export async function login(formData: { email: string; password: string }) {
@@ -50,6 +51,22 @@ export async function sendEmail(email: string, name: string) {
     headers: {
       "Content-type": "application/json",
     },
+    identity: false,
+  });
+}
+
+export async function resetPassword(formData: {
+  codeId: number;
+  code: string;
+  email: string;
+  newPassword: string;
+}) {
+  return await request(fetchKeys.resetPassword, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(formData),
     identity: false,
   });
 }
