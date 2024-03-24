@@ -1,5 +1,3 @@
-import { logout } from "@/api/identity";
-import { AUTH_ROUTES } from "@/pages/routes";
 import {
   Avatar,
   Button,
@@ -15,6 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { logout } from "@/api/identity";
+import { AUTH_ROUTES } from "@/pages/routes";
 
 export const ProfileMenu = ({ username }: { username: string | undefined }) => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
       if (request.status === 200) {
         navigate(AUTH_ROUTES.login);
         toast({
-          title: "Signed Out!",
+          title: "Signed out!",
           status: "success",
         });
       } else {
@@ -54,9 +54,9 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
         </HStack>
       </MenuButton>
       <MenuList>
-        <MenuGroup title="My Account" fontSize="md">
+        <MenuGroup title="My Account" fontSize="sm">
           <MenuDivider />
-          <MenuItem icon={<LogOut />} onClick={handleSignOut}>
+          <MenuItem icon={<LogOut />} onClick={handleSignOut} fontSize="sm">
             Sign Out
           </MenuItem>
         </MenuGroup>
