@@ -1,25 +1,15 @@
 import {
-  Avatar,
-  Button,
   Flex,
   HStack,
   Image,
   Link,
   Text,
 } from "@chakra-ui/react";
-
-export const ProfileTile = ({ username }: { username: string }) => {
-  return (
-    <Button variant="ghost">
-      <HStack spacing={3}>
-        <Text>{username}</Text>
-        <Avatar name={username} border="2px solid #2631c3" size="sm" />
-      </HStack>
-    </Button>
-  );
-};
+import { useAuthentication } from "@/helpers/hooks/useAuthentication";
+import { ProfileMenu } from "./components/ProfileMenu";
 
 export const Navbar = () => {
+  const { user } = useAuthentication();
   return (
     <Flex height="100px" alignItems="center">
       <Flex justifyContent="space-between" w="100%" p={8}>
@@ -36,7 +26,7 @@ export const Navbar = () => {
             </Text>
           </HStack>
         </Link>
-        <ProfileTile username="emksakashili@gmail.com" />
+        <ProfileMenu username={user?.userName} />
       </Flex>
     </Flex>
   );
