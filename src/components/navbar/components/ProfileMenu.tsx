@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   HStack,
+  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -11,13 +12,15 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { LogOut } from "lucide-react";
+import { LogOut, UserCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "@/api/identity";
 import { AUTH_ROUTES } from "@/pages/routes";
+import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 
 export const ProfileMenu = ({ username }: { username: string | undefined }) => {
   const navigate = useNavigate();
+  const { user } = useAuthentication();
   const toast = useToast({ duration: 5000, isClosable: true, position: "top" });
 
   const handleSignOut = async () => {
@@ -55,6 +58,14 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
       </MenuButton>
       <MenuList>
         <MenuGroup title="My Account" fontSize="sm">
+          {user?.roles.includes("Admin") && (
+            <Link href="/admin" _hover={{ textDecoration: "none" }}>
+              <MenuDivider />
+              <MenuItem icon={<UserCog />} fontSize="sm">
+                Admin Panel
+              </MenuItem>
+            </Link>
+          )}
           <MenuDivider />
           <MenuItem icon={<LogOut />} onClick={handleSignOut} fontSize="sm">
             Sign Out

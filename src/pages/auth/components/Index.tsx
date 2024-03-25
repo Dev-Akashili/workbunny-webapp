@@ -95,7 +95,7 @@ export const FormButton = ({ name, isLoading, ...p }: FormButtonProps) => {
     <Button
       w="100%"
       color="white"
-      backgroundColor="#2631c3"
+      bgColor="#2631c3"
       _hover={{
         bgColor: "#3c47e5",
       }}

@@ -34,6 +34,16 @@ export const Register = () => {
       return;
     }
 
+    // Make sure username has no whitespace
+    if (/\s/g.test(username)) {
+      setAlert({
+        status: "error",
+        title: "Username should not have any space!",
+      });
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const request = await register({ email: email, password: password });
 

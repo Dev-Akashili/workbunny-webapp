@@ -4,10 +4,9 @@ import { Auth } from "@/pages/auth/Auth";
 import { Forbidden } from "@/pages/error/Forbidden";
 import { NotFound } from "@/pages/error/NotFound";
 import { ReactNode } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const IndexRoute = () => {
-  const { pathname } = useLocation();
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated === undefined) {
@@ -18,7 +17,7 @@ export const IndexRoute = () => {
     return <Navigate to="/auth?page=login" replace />;
   }
 
-  return <Navigate to={pathname} replace />;
+  return <Navigate to="/home" replace />;
 };
 
 export const AuthRoute = ({

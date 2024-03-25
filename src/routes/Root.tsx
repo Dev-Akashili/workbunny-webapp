@@ -1,7 +1,13 @@
+import {
+  IndexRoute,
+  AuthRoute,
+  AuthRedirect,
+  AdminRoute,
+} from "@/routes/Custom";
+import { NotFound } from "@/pages/error/NotFound";
+import { Admin } from "@/pages/admin/Admin";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "@/pages/home/Home";
-import { IndexRoute, AuthRoute, AuthRedirect } from "@/routes/Custom";
-import { NotFound } from "@/pages/error/NotFound";
 
 export const Root = () => {
   return (
@@ -16,6 +22,14 @@ export const Root = () => {
           <AuthRoute>
             <Home />
           </AuthRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <Admin />
+          </AdminRoute>
         }
       />
       <Route

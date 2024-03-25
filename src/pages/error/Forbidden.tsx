@@ -1,9 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { ErrorPage } from "./components/ErrorPage";
 
 export const Forbidden = () => {
   return (
-    <Box w="100px" h="100px" bgColor="purple">
-      Forbidden
-    </Box>
+    <ErrorPage
+      status="403"
+      title="Access Denied/Forbiden"
+      description="You are not authorized to visit this page."
+    />
   );
 };
