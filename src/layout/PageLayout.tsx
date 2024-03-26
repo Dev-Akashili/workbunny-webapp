@@ -11,9 +11,11 @@ export const PageLayout = ({
   return (
     <Flex minH="100vh">
       <Sidebar />
-      <Box w="80%">
+      <Box w={{ base: "100%", md: "100%", lg: "80%" }} ml="auto">
         <Navbar />
-        {children}
+        <Box mt="80px" overflow="auto">
+          {children}
+        </Box>
       </Box>
     </Flex>
   );
