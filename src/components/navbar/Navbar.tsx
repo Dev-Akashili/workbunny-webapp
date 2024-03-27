@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { ProfileMenu } from "./components/ProfileMenu";
 import { useAuthentication } from "@/helpers/hooks/useAuthentication";
-import { MobileDrawer } from "./components/MobileDrawer";
+import { SidebarMobile } from "../sidebar/SidebarMobile";
 
 export const Navbar = () => {
   const { user } = useAuthentication();
@@ -14,7 +14,7 @@ export const Navbar = () => {
       h="80px"
     >
       <Flex justifyContent="space-between" w="100%" p={8}>
-        <MobileDrawer />
+        <SidebarMobile />
         <Box display={{ base: "none", md: "none", lg: "inline" }}></Box>
         <ProfileMenu username={user?.userName} />
       </Flex>

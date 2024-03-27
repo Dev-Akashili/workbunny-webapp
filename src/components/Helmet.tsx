@@ -2,11 +2,7 @@ import { HStack, Image, Link, Text } from "@chakra-ui/react";
 
 export const Helmet = () => {
   return (
-    <Link
-      href="/home"
-      _hover={{ textDecoration: "none" }}
-      m="25px auto 0px 20px"
-    >
+    <Link href="/home" _hover={{ textDecoration: "none" }} p={3}>
       <HStack spacing={3}>
         <Image
           src="https://img.icons8.com/glyph-neue/68/2631c3/year-of-rabbit.png"

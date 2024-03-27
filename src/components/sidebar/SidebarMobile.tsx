@@ -13,7 +13,7 @@ import { Menu } from "lucide-react";
 import { useRef } from "react";
 import { Helmet } from "@/components/Helmet";
 
-export const MobileDrawer = () => {
+export const SidebarMobile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
