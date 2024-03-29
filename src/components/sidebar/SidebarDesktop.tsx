@@ -1,9 +1,14 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { Helmet } from "../Helmet";
 import { SidebarItem } from "./components/SidebarItem";
-import { Home, UserCog } from "lucide-react";
+import { Home, LayoutDashboard, ShieldAlert } from "lucide-react";
+import { useAuthentication } from "@/helpers/hooks/useAuthentication";
+import { Roles } from "@/constants";
+import { ROUTES } from "@/pages/routes";
 
 export const SidebarDesktop = () => {
+  const { user } = useAuthentication();
+
   return (
     <VStack
       w="20%"
@@ -19,13 +24,26 @@ export const SidebarDesktop = () => {
     >
       <Helmet />
       <Box overflow="auto" w="100%">
-        <SidebarItem name="Home" link="/home" path="/home" icon={<Home />} />
         <SidebarItem
-          name="Admin Panel"
-          link="/admin"
-          path="/admin"
-          icon={<UserCog />}
+          name="Home"
+          link={ROUTES.home}
+          path={ROUTES.home}
+          icon={<Home />}
         />
+        <SidebarItem
+          name="Personal Dashboard"
+          link={ROUTES.dashboard}
+          path={ROUTES.dashboard}
+          icon={<LayoutDashboard />}
+        />
+        {user?.roles.includes(Roles.Admin) && (
+          <SidebarItem
+            name="Admin Panel"
+            link={ROUTES.admin}
+            path={ROUTES.admin}
+            icon={<ShieldAlert />}
+          />
+        )}
       </Box>
     </VStack>
   );

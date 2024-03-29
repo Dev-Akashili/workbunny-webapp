@@ -21,14 +21,14 @@ export const Register = () => {
       "email",
       "username",
       "password",
-      "confirm",
+      "confirm"
     ]);
 
     // Make sure passwords are the same
     if (password !== confirm) {
       setAlert({
         status: "error",
-        title: "Passwords do not match!",
+        title: "Passwords do not match!"
       });
       setIsLoading(false);
       return;
@@ -38,7 +38,17 @@ export const Register = () => {
     if (/\s/g.test(username)) {
       setAlert({
         status: "error",
-        title: "Username should not have any space!",
+        title: "Username should not have any space!"
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    // Make sure username is more than 2 characters
+    if (username.length < 2) {
+      setAlert({
+        status: "error",
+        title: "Username should be more than 2 characters!"
       });
       setIsLoading(false);
       return;
@@ -55,12 +65,12 @@ export const Register = () => {
           const message = await result.text();
           setAlert({
             status: "error",
-            title: message,
+            title: message
           });
         } else {
           setAlert({
             status: "error",
-            title: "Something went wrong! Please try again later.",
+            title: "Something went wrong! Please try again later."
           });
         }
       } else if (request.status === 400) {
@@ -70,7 +80,7 @@ export const Register = () => {
       } else {
         setAlert({
           status: "error",
-          title: "Something went wrong! Please try again later.",
+          title: "Something went wrong! Please try again later."
         });
       }
     } catch (error) {

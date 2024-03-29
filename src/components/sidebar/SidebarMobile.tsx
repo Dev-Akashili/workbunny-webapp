@@ -5,17 +5,21 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
-import { Menu } from "lucide-react";
+import { Home, LayoutDashboard, Menu, ShieldAlert } from "lucide-react";
 import { useRef } from "react";
 import { Helmet } from "@/components/Helmet";
+import { SidebarItem } from "./components/SidebarItem";
+import { useAuthentication } from "@/helpers/hooks/useAuthentication";
+import { ROUTES } from "@/pages/routes";
+import { Roles } from "@/constants";
 
 export const SidebarMobile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
+  const { user } = useAuthentication();
 
   return (
     <Box display={{ base: "inline", md: "inline", lg: "none" }}>
@@ -31,12 +35,31 @@ export const SidebarMobile = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>
-            <Helmet />
-          </DrawerHeader>
 
           <DrawerBody>
-            <></>
+            <Helmet />
+            <Box overflow="auto" w="100%">
+              <SidebarItem
+                name="Home"
+                link={ROUTES.home}
+                path={ROUTES.home}
+                icon={<Home />}
+              />
+              <SidebarItem
+                name="Personal Dashboard"
+                link={ROUTES.dashboard}
+                path={ROUTES.dashboard}
+                icon={<LayoutDashboard />}
+              />
+              {user?.roles.includes(Roles.Admin) && (
+                <SidebarItem
+                  name="Admin Panel"
+                  link={ROUTES.admin}
+                  path={ROUTES.admin}
+                  icon={<ShieldAlert />}
+                />
+              )}
+            </Box>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

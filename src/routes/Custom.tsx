@@ -1,4 +1,5 @@
 import { Busy } from "@/components/Busy";
+import { Roles } from "@/constants";
 import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 import { Auth } from "@/pages/auth/Auth";
 import { Forbidden } from "@/pages/error/Forbidden";
@@ -67,7 +68,7 @@ export const AdminRoute = ({
     return <Navigate to="/auth?page=login" replace />;
   }
 
-  if (!user?.roles.includes("Admin")) {
+  if (!user?.roles.includes(Roles.Admin)) {
     return <Forbidden />;
   }
 

@@ -2,7 +2,6 @@ import {
   Avatar,
   Button,
   HStack,
-  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -10,17 +9,15 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import { LogOut, UserCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "@/api/identity";
 import { AUTH_ROUTES } from "@/pages/routes";
-import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 
 export const ProfileMenu = ({ username }: { username: string | undefined }) => {
   const navigate = useNavigate();
-  const { user } = useAuthentication();
   const toast = useToast({ duration: 5000, isClosable: true, position: "top" });
 
   const handleSignOut = async () => {
@@ -31,19 +28,19 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
         navigate(AUTH_ROUTES.login);
         toast({
           title: "Signed out!",
-          status: "success",
+          status: "success"
         });
       } else {
         toast({
           title: "Something went wrong!",
-          status: "error",
+          status: "error"
         });
       }
     } catch (error) {
       console.warn("Sign Out failed!");
       toast({
         title: "Network error!",
-        status: "error",
+        status: "error"
       });
     }
   };
@@ -53,22 +50,22 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
       <MenuButton as={Button} variant="ghost">
         <HStack spacing={3}>
           <Text>{username}</Text>
-          <Avatar name={username} border="2px solid #2631c3" size="sm" />
+          <Avatar
+            name={username?.slice(0, 1) + " " + username?.slice(1)}
+            border="2px solid #2631c3"
+            size="sm"
+          />
         </HStack>
       </MenuButton>
       <MenuList>
         <MenuGroup title="My Account" fontSize="sm">
-          {user?.roles.includes("Admin") && (
-            <Link href="/admin" _hover={{ textDecoration: "none" }}>
-              <MenuDivider />
-              <MenuItem icon={<UserCog />} fontSize="sm">
-                Admin Panel
-              </MenuItem>
-            </Link>
-          )}
+          <MenuDivider />
+          <MenuItem icon={<UserCog />} onClick={handleSignOut} fontSize="sm">
+            Profile Settings
+          </MenuItem>
           <MenuDivider />
           <MenuItem icon={<LogOut />} onClick={handleSignOut} fontSize="sm">
-            Sign Out
+            Sign out
           </MenuItem>
         </MenuGroup>
       </MenuList>
