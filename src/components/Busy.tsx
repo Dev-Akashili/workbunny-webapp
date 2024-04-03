@@ -21,12 +21,7 @@ export const Busy = ({ isCentered = false }: { isCentered?: boolean }) => {
   return (
     <>
       {isCentered ? (
-        <Flex
-          minH="100vh"
-          justifyContent="center"
-          alignItems="center"
-          bgImage="linear-gradient(to bottom right, #fff, #dce1fc, #fff,  #fff)"
-        >
+        <Flex minH="80vh" justifyContent="center" alignItems="center">
           <AnimatedLogo />
         </Flex>
       ) : (

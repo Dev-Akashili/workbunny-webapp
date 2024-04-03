@@ -7,9 +7,16 @@ interface SidebarItemProps {
   link: string;
   path: string;
   icon: ReactNode;
+  mobile?: boolean;
 }
 
-export const SidebarItem = ({ name, link, path, icon }: SidebarItemProps) => {
+export const SidebarItem = ({
+  name,
+  link,
+  path,
+  icon,
+  mobile = false
+}: SidebarItemProps) => {
   const location = useLocation();
   const [isCurrentPath, setIsCurrentPath] = useState<boolean>(false);
 
@@ -26,8 +33,9 @@ export const SidebarItem = ({ name, link, path, icon }: SidebarItemProps) => {
       p={3}
       my={1}
       color={isCurrentPath ? "#2631C3" : "gray.800"}
-      borderLeft={isCurrentPath ? "5px solid #2631C3" : ""}
+      borderLeft={isCurrentPath ? (!mobile ? "5px solid #2631C3" : "") : ""}
       bg={isCurrentPath ? "#e8f0fc" : ""}
+      borderRadius={isCurrentPath ? (mobile ? "8px" : "") : ""}
     >
       {icon}
       <Text>{name}</Text>

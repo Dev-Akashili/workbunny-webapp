@@ -44,12 +44,14 @@ export const SidebarMobile = () => {
                 link={ROUTES.home}
                 path={ROUTES.home}
                 icon={<Home />}
+                mobile
               />
               <SidebarItem
                 name="Personal Dashboard"
                 link={ROUTES.dashboard}
                 path={ROUTES.dashboard}
                 icon={<LayoutDashboard />}
+                mobile
               />
               {user?.roles.includes(Roles.Admin) && (
                 <SidebarItem
@@ -57,6 +59,7 @@ export const SidebarMobile = () => {
                   link={ROUTES.admin}
                   path={ROUTES.admin}
                   icon={<ShieldAlert />}
+                  mobile
                 />
               )}
             </Box>

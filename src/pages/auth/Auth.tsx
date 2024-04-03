@@ -1,10 +1,10 @@
-import { Flex } from "@chakra-ui/react";
 import { LogIn } from "./components/LogIn";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Register } from "./components/Register";
 import { ForgotPassword } from "./components/ForgotPassword";
 import { VerifyEmail } from "./components/verifyEmail/VerifyEmail";
+import { DefaultLayout } from "@/layout/DefaultLayout";
 
 export const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -34,14 +34,5 @@ export const Auth = () => {
     }
   };
 
-  return (
-    <Flex
-      minH="100vh"
-      justifyContent="center"
-      alignItems="center"
-      bgImage="linear-gradient(to bottom right, #fff, #dce1fc, #fff,  #fff)"
-    >
-      {getPage()}
-    </Flex>
-  );
+  return <DefaultLayout>{getPage()}</DefaultLayout>;
 };

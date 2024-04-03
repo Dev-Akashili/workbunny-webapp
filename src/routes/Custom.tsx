@@ -1,6 +1,7 @@
 import { Busy } from "@/components/Busy";
 import { Roles } from "@/constants";
 import { useAuthentication } from "@/helpers/hooks/useAuthentication";
+import { DefaultLayout } from "@/layout/DefaultLayout";
 import { Auth } from "@/pages/auth/Auth";
 import { Forbidden } from "@/pages/error/Forbidden";
 import { NotFound } from "@/pages/error/NotFound";
@@ -22,7 +23,7 @@ export const IndexRoute = () => {
 };
 
 export const AuthRoute = ({
-  children,
+  children
 }: {
   children: ReactNode | ReactNode[];
 }) => {
@@ -43,7 +44,11 @@ export const AuthRedirect = () => {
   const { isAuthenticated } = useAuthentication();
 
   if (isAuthenticated === undefined) {
-    return <Busy isCentered />;
+    return (
+      <DefaultLayout>
+        <Busy />
+      </DefaultLayout>
+    );
   }
 
   if (!isAuthenticated) {
@@ -54,7 +59,7 @@ export const AuthRedirect = () => {
 };
 
 export const AdminRoute = ({
-  children,
+  children
 }: {
   children: ReactNode | ReactNode[];
 }) => {
