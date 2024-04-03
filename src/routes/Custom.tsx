@@ -5,6 +5,7 @@ import { DefaultLayout } from "@/layout/DefaultLayout";
 import { Auth } from "@/pages/auth/Auth";
 import { Forbidden } from "@/pages/error/Forbidden";
 import { NotFound } from "@/pages/error/NotFound";
+import { AUTH_ROUTES, ROUTES } from "@/pages/routes";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -16,10 +17,10 @@ export const IndexRoute = () => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth?page=login" replace />;
+    return <Navigate to={AUTH_ROUTES.login} replace />;
   }
 
-  return <Navigate to="/home" replace />;
+  return <Navigate to={ROUTES.home} replace />;
 };
 
 export const AuthRoute = ({
@@ -34,7 +35,7 @@ export const AuthRoute = ({
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth?page=login" replace />;
+    return <Navigate to={AUTH_ROUTES.login} replace />;
   }
 
   return children;
@@ -70,7 +71,7 @@ export const AdminRoute = ({
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth?page=login" replace />;
+    return <Navigate to={AUTH_ROUTES.login} replace />;
   }
 
   if (!user?.roles.includes(Roles.Admin)) {
