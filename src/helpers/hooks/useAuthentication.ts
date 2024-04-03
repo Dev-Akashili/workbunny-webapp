@@ -28,7 +28,7 @@ export const useAuthentication = (): {
 
   useEffect(() => {
     authenticate();
-  }, [authenticate]);
+  }, []);
 
   return { isAuthenticated, user };
 };

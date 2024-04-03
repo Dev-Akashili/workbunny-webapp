@@ -8,18 +8,25 @@ import {
   DrawerOverlay,
   useDisclosure
 } from "@chakra-ui/react";
-import { Home, LayoutDashboard, Menu, ShieldAlert } from "lucide-react";
+import {
+  BarChart,
+  HelpCircle,
+  Home,
+  LayoutDashboard,
+  Mail,
+  Menu,
+  ShieldAlert
+} from "lucide-react";
 import { useRef } from "react";
 import { Helmet } from "@/components/Helmet";
 import { SidebarItem } from "./components/SidebarItem";
-import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 import { ROUTES } from "@/pages/routes";
 import { Roles } from "@/constants";
+import { UserModel } from "@/types";
 
-export const SidebarMobile = () => {
+export const SidebarMobile = ({ user }: { user: UserModel | null }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
-  const { user } = useAuthentication();
 
   return (
     <Box display={{ base: "inline", md: "inline", lg: "none" }}>
@@ -47,10 +54,31 @@ export const SidebarMobile = () => {
                 mobile
               />
               <SidebarItem
-                name="Personal Dashboard"
+                name="Dashboard"
                 link={ROUTES.dashboard}
                 path={ROUTES.dashboard}
                 icon={<LayoutDashboard />}
+                mobile
+              />
+              <SidebarItem
+                name="Analytics"
+                link={ROUTES.dashboard}
+                path={ROUTES.admin}
+                icon={<BarChart />}
+                mobile
+              />
+              <SidebarItem
+                name="Messages"
+                link={ROUTES.dashboard}
+                path={ROUTES.admin}
+                icon={<Mail />}
+                mobile
+              />
+              <SidebarItem
+                name="Get Help"
+                link={ROUTES.help}
+                path={ROUTES.help}
+                icon={<HelpCircle />}
                 mobile
               />
               {user?.roles.includes(Roles.Admin) && (

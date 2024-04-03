@@ -3,7 +3,8 @@ const basePath = "";
 export const ROUTES = {
   home: `${basePath}/home`,
   dashboard: `${basePath}/dashboard`,
-  admin: `${basePath}/admin`
+  admin: `${basePath}/admin`,
+  help: `${basePath}/help`
 };
 
 const authBasePath = "/auth";

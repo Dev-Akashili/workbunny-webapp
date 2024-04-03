@@ -28,7 +28,11 @@ export const SidebarItem = ({
     <HStack
       as={Link}
       href={link}
-      _hover={{ textDecor: "none", bg: isCurrentPath ? "" : "gray.200" }}
+      _hover={{
+        textDecor: "none",
+        bg: isCurrentPath ? "" : "gray.200",
+        borderRadius: mobile ? "8px" : ""
+      }}
       spacing={5}
       p={3}
       my={1}

@@ -10,6 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "@/pages/home/Home";
 import { Dashboard } from "@/pages/dashboard/Dashboard";
 import { PageLayout } from "@/layout/PageLayout";
+import { GetHelp } from "@/pages/help/GetHelp";
 
 export const Root = () => {
   return (
@@ -37,6 +38,14 @@ export const Root = () => {
           }
         />
         <Route
+          path="/help"
+          element={
+            <AuthRoute>
+              <GetHelp />
+            </AuthRoute>
+          }
+        />
+        <Route
           path="/admin"
           element={
             <AdminRoute>
@@ -44,15 +53,15 @@ export const Root = () => {
             </AdminRoute>
           }
         />
+        <Route
+          path="*"
+          element={
+            <AuthRoute>
+              <NotFound />
+            </AuthRoute>
+          }
+        />
       </Route>
-      <Route
-        path="*"
-        element={
-          <AuthRoute>
-            <NotFound />
-          </AuthRoute>
-        }
-      />
     </Routes>
   );
 };

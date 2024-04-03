@@ -21,7 +21,7 @@ export const Busy = ({ isCentered = false }: { isCentered?: boolean }) => {
   return (
     <>
       {isCentered ? (
-        <Flex minH="80vh" justifyContent="center" alignItems="center">
+        <Flex minH="100vh" justifyContent="center" alignItems="center">
           <AnimatedLogo />
         </Flex>
       ) : (

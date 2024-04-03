@@ -1,14 +1,19 @@
+import {
+  BarChart,
+  HelpCircle,
+  Home,
+  LayoutDashboard,
+  Mail,
+  ShieldAlert
+} from "lucide-react";
+import { Roles } from "@/constants";
+import { ROUTES } from "@/pages/routes";
 import { Box, VStack } from "@chakra-ui/react";
 import { Helmet } from "../Helmet";
 import { SidebarItem } from "./components/SidebarItem";
-import { Home, LayoutDashboard, ShieldAlert } from "lucide-react";
-import { useAuthentication } from "@/helpers/hooks/useAuthentication";
-import { Roles } from "@/constants";
-import { ROUTES } from "@/pages/routes";
+import { UserModel } from "@/types";
 
-export const SidebarDesktop = () => {
-  const { user } = useAuthentication();
-
+export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
   return (
     <VStack
       w="20%"
@@ -31,10 +36,28 @@ export const SidebarDesktop = () => {
           icon={<Home />}
         />
         <SidebarItem
-          name="Personal Dashboard"
+          name="Dashboard"
           link={ROUTES.dashboard}
           path={ROUTES.dashboard}
           icon={<LayoutDashboard />}
+        />
+        <SidebarItem
+          name="Analytics"
+          link={ROUTES.dashboard}
+          path={ROUTES.admin}
+          icon={<BarChart />}
+        />
+        <SidebarItem
+          name="Messages"
+          link={ROUTES.dashboard}
+          path={ROUTES.admin}
+          icon={<Mail />}
+        />
+        <SidebarItem
+          name="Get Help"
+          link={ROUTES.help}
+          path={ROUTES.help}
+          icon={<HelpCircle />}
         />
         {user?.roles.includes(Roles.Admin) && (
           <SidebarItem
