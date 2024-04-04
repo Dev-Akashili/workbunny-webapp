@@ -4,7 +4,9 @@ export const ROUTES = {
   home: `${basePath}/home`,
   dashboard: `${basePath}/dashboard`,
   admin: `${basePath}/admin`,
-  help: `${basePath}/help`
+  help: `${basePath}/help`,
+  analytics: `${basePath}/analytics`,
+  messages: `${basePath}/messages`
 };
 
 const authBasePath = "/auth";

@@ -11,6 +11,9 @@ import { Home } from "@/pages/home/Home";
 import { Dashboard } from "@/pages/dashboard/Dashboard";
 import { PageLayout } from "@/layout/PageLayout";
 import { GetHelp } from "@/pages/help/GetHelp";
+import { ROUTES } from "@/pages/routes";
+import { Analytics } from "@/pages/analytics/Analytics";
+import { Messages } from "@/pages/messages/Messages";
 
 export const Root = () => {
   return (
@@ -22,7 +25,7 @@ export const Root = () => {
 
       <Route element={<PageLayout />}>
         <Route
-          path="/home"
+          path={ROUTES.home}
           element={
             <AuthRoute>
               <Home />
@@ -30,7 +33,7 @@ export const Root = () => {
           }
         />
         <Route
-          path="/dashboard"
+          path={ROUTES.dashboard}
           element={
             <AuthRoute>
               <Dashboard />
@@ -38,7 +41,7 @@ export const Root = () => {
           }
         />
         <Route
-          path="/help"
+          path={ROUTES.help}
           element={
             <AuthRoute>
               <GetHelp />
@@ -46,7 +49,23 @@ export const Root = () => {
           }
         />
         <Route
-          path="/admin"
+          path={ROUTES.analytics}
+          element={
+            <AuthRoute>
+              <Analytics />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path={ROUTES.messages}
+          element={
+            <AuthRoute>
+              <Messages />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path={ROUTES.admin}
           element={
             <AdminRoute>
               <Admin />

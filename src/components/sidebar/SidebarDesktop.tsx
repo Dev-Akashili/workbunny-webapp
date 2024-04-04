@@ -1,17 +1,8 @@
-import {
-  BarChart,
-  HelpCircle,
-  Home,
-  LayoutDashboard,
-  Mail,
-  ShieldAlert
-} from "lucide-react";
-import { Roles } from "@/constants";
-import { ROUTES } from "@/pages/routes";
-import { Box, VStack } from "@chakra-ui/react";
 import { Helmet } from "../Helmet";
-import { SidebarItem } from "./components/SidebarItem";
 import { UserModel } from "@/types";
+import { sidebarItems } from "./data";
+import { Box, VStack } from "@chakra-ui/react";
+import { SidebarItem } from "./components/SidebarItem";
 
 export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
   return (
@@ -29,43 +20,16 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
     >
       <Helmet />
       <Box overflow="auto" w="100%">
-        <SidebarItem
-          name="Home"
-          link={ROUTES.home}
-          path={ROUTES.home}
-          icon={<Home />}
-        />
-        <SidebarItem
-          name="Dashboard"
-          link={ROUTES.dashboard}
-          path={ROUTES.dashboard}
-          icon={<LayoutDashboard />}
-        />
-        <SidebarItem
-          name="Analytics"
-          link={ROUTES.dashboard}
-          path={ROUTES.admin}
-          icon={<BarChart />}
-        />
-        <SidebarItem
-          name="Messages"
-          link={ROUTES.dashboard}
-          path={ROUTES.admin}
-          icon={<Mail />}
-        />
-        <SidebarItem
-          name="Get Help"
-          link={ROUTES.help}
-          path={ROUTES.help}
-          icon={<HelpCircle />}
-        />
-        {user?.roles.includes(Roles.Admin) && (
-          <SidebarItem
-            name="Admin Panel"
-            link={ROUTES.admin}
-            path={ROUTES.admin}
-            icon={<ShieldAlert />}
-          />
+        {sidebarItems.map((item, index) =>
+          item.condition && !item.condition(user) ? null : (
+            <SidebarItem
+              key={index}
+              name={item.name}
+              link={item.link}
+              path={item.path}
+              icon={item.icon}
+            />
+          )
         )}
       </Box>
     </VStack>
