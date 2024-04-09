@@ -1,8 +1,14 @@
+import { ROUTES } from "@/pages/routes";
 import { BarChart, Edit, PlusCircle, Star } from "lucide-react";
 
 export const buttons = [
-  { name: "Start New Job Search", icon: <PlusCircle />, color: "green" },
-  { name: "Manage My Job Search", icon: <Edit />, color: "blue" },
-  { name: "Favorite Job Search", icon: <Star />, color: "orange" },
-  { name: "View My Analytics", icon: <BarChart />, color: "purple" }
+  {
+    name: "Start a New Job Share",
+    link: ROUTES.dashboard.create,
+    icon: <PlusCircle />,
+    color: "green"
+  },
+  { name: "Manage My Job Shares", link: "/", icon: <Edit />, color: "blue" },
+  { name: "Saved Job Shares", link: "/", icon: <Star />, color: "orange" },
+  { name: "View My Analytics", link: "/", icon: <BarChart />, color: "purple" }
 ];

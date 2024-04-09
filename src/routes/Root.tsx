@@ -14,6 +14,7 @@ import { GetHelp } from "@/pages/help/GetHelp";
 import { ROUTES } from "@/pages/routes";
 import { Analytics } from "@/pages/analytics/Analytics";
 import { Messages } from "@/pages/messages/Messages";
+import { CreateJobShare } from "@/pages/dashboard/pages/CreateJobShare";
 
 export const Root = () => {
   return (
@@ -32,14 +33,24 @@ export const Root = () => {
             </AuthRoute>
           }
         />
-        <Route
-          path={ROUTES.dashboard}
-          element={
-            <AuthRoute>
-              <Dashboard />
-            </AuthRoute>
-          }
-        />
+        <Route path={ROUTES.dashboard.base}>
+          <Route
+            index
+            element={
+              <AuthRoute>
+                <Dashboard />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="create"
+            element={
+              <AuthRoute>
+                <CreateJobShare />
+              </AuthRoute>
+            }
+          />
+        </Route>
         <Route
           path={ROUTES.help}
           element={

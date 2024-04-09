@@ -54,6 +54,7 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
             name={username?.slice(0, 1) + " " + username?.slice(1)}
             border="2px solid #2631c3"
             size="sm"
+            color="#ffff"
           />
         </HStack>
       </MenuButton>

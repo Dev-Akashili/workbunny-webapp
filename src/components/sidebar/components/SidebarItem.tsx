@@ -21,7 +21,7 @@ export const SidebarItem = ({
   const [isCurrentPath, setIsCurrentPath] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsCurrentPath(path === location.pathname);
+    setIsCurrentPath(location.pathname.includes(path));
   }, [isCurrentPath]);
 
   return (

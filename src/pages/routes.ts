@@ -2,7 +2,10 @@ const basePath = "";
 
 export const ROUTES = {
   home: `${basePath}/home`,
-  dashboard: `${basePath}/dashboard`,
+  dashboard: {
+    base: `${basePath}/dashboard`,
+    create: `${basePath}/dashboard/create`
+  },
   admin: `${basePath}/admin`,
   help: `${basePath}/help`,
   analytics: `${basePath}/analytics`,
