@@ -2,7 +2,7 @@ import {
   IndexRoute,
   AuthRoute,
   AuthRedirect,
-  AdminRoute
+  AdminRoute,
 } from "@/routes/Custom";
 import { NotFound } from "@/pages/error/NotFound";
 import { Admin } from "@/pages/admin/Admin";
@@ -13,7 +13,7 @@ import { PageLayout } from "@/layout/PageLayout";
 import { GetHelp } from "@/pages/help/GetHelp";
 import { ROUTES } from "@/pages/routes";
 import { Analytics } from "@/pages/analytics/Analytics";
-import { Messages } from "@/pages/messages/Messages";
+import { Activity } from "@/pages/activity/Activity";
 import { CreateJobShare } from "@/pages/dashboard/pages/CreateJobShare";
 
 export const Root = () => {
@@ -68,10 +68,10 @@ export const Root = () => {
           }
         />
         <Route
-          path={ROUTES.messages}
+          path={ROUTES.activity}
           element={
             <AuthRoute>
-              <Messages />
+              <Activity />
             </AuthRoute>
           }
         />

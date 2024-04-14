@@ -4,12 +4,12 @@ export const ROUTES = {
   home: `${basePath}/home`,
   dashboard: {
     base: `${basePath}/dashboard`,
-    create: `${basePath}/dashboard/create`
+    create: `${basePath}/dashboard/create`,
   },
   admin: `${basePath}/admin`,
   help: `${basePath}/help`,
   analytics: `${basePath}/analytics`,
-  messages: `${basePath}/messages`
+  activity: `${basePath}/activity`,
 };
 
 const authBasePath = "/auth";
@@ -20,6 +20,6 @@ export const AUTH_ROUTES = {
   forgotPasword: `${authBasePath}?page=forgot-password`,
   verifyEmail: {
     regiser: (email: string) =>
-      `${authBasePath}?page=verify-email&name=register&email=${email}`
-  }
+      `${authBasePath}?page=verify-email&name=register&email=${email}`,
+  },
 };

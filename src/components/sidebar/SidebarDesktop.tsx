@@ -18,7 +18,9 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
       spacing={5}
       display={{ base: "none", md: "none", lg: "inline" }}
     >
-      <Helmet />
+      <Box ml={2}>
+        <Helmet />
+      </Box>
       <Box overflow="auto" w="100%">
         {sidebarItems.map((item, index) =>
           item.condition && !item.condition(user) ? null : (

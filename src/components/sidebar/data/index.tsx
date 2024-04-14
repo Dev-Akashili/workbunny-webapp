@@ -1,10 +1,10 @@
 import {
   Home,
-  Mail,
   BarChart,
   HelpCircle,
   ShieldAlert,
-  LayoutDashboard
+  LayoutDashboard,
+  ActivitySquare,
 } from "lucide-react";
 import { ROUTES } from "@/pages/routes";
 import { UserModel } from "@/types";
@@ -24,37 +24,37 @@ export const sidebarItems: SidebarItem[] = [
     name: "Home",
     link: ROUTES.home,
     path: ROUTES.home,
-    icon: <Home />
+    icon: <Home />,
   },
   {
     name: "Dashboard",
     link: ROUTES.dashboard.base,
     path: ROUTES.dashboard.base,
-    icon: <LayoutDashboard />
+    icon: <LayoutDashboard />,
   },
   {
     name: "Analytics",
     link: ROUTES.analytics,
     path: ROUTES.analytics,
-    icon: <BarChart />
+    icon: <BarChart />,
   },
   {
-    name: "Messages",
-    link: ROUTES.messages,
-    path: ROUTES.messages,
-    icon: <Mail />
+    name: "Activity",
+    link: ROUTES.activity,
+    path: ROUTES.activity,
+    icon: <ActivitySquare />,
   },
   {
     name: "Get Help",
     link: ROUTES.help,
     path: ROUTES.help,
-    icon: <HelpCircle />
+    icon: <HelpCircle />,
   },
   {
     name: "Admin Panel",
     link: ROUTES.admin,
     path: ROUTES.admin,
     icon: <ShieldAlert />,
-    condition: (user: UserModel | null) => user?.roles.includes(Roles.Admin)
-  }
+    condition: (user: UserModel | null) => user?.roles.includes(Roles.Admin),
+  },
 ];
