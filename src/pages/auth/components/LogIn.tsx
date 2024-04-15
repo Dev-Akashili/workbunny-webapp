@@ -1,12 +1,12 @@
 import { HStack, Text, useToast } from "@chakra-ui/react";
 import { AlertObject, FormLayout } from "../layout/FormLayout";
-import { FormButton, FormInput, FormLink, FormPasswordInput } from "./Index";
 import { useState } from "react";
 import { getFormData } from "@/utils";
 import { login } from "@/api/identity";
 import { login as custom } from "@/api/auth";
 import { AUTH_ROUTES, ROUTES } from "@/pages/routes";
 import { useNavigate } from "react-router-dom";
+import { FormButton, FormInput, FormLink, FormPasswordInput } from "./form";
 
 export const LogIn = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export const LogIn = () => {
         navigate(ROUTES.home);
         toast({
           title: "Login successful",
-          status: "success",
+          status: "success"
         });
       } else {
         const request = await custom({ email: email, password: password });
@@ -44,7 +44,7 @@ export const LogIn = () => {
                 style={{
                   textDecoration: "underline",
                   color: "blue",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 {" "}
@@ -52,7 +52,7 @@ export const LogIn = () => {
               </a>
               to send a new link.
             </>
-          ),
+          )
         });
         setIsLoading(false);
       }
@@ -60,7 +60,7 @@ export const LogIn = () => {
       console.warn("Login failed!");
       toast({
         title: "Network error!",
-        status: "error",
+        status: "error"
       });
       setIsLoading(false);
     }

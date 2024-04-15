@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Busy } from "@/components/Busy";
-import { sendEmail, verifyEmail } from "@/api/auth";
 import { Error } from "../Error";
-import { EmailSent } from "./components/EmailSent";
-import { EmailVerified } from "./components/EmailVerified";
-import { LinkExpired } from "./components/LinkExpired";
+import { Busy } from "@/components/Busy";
+import { useEffect, useState } from "react";
 import { ResetPassword } from "../ResetPassword";
+import { useSearchParams } from "react-router-dom";
+import { EmailSent } from "./components/EmailSent";
+import { sendEmail, verifyEmail } from "@/api/auth";
+import { LinkExpired } from "./components/LinkExpired";
+import { EmailVerified } from "./components/EmailVerified";
 
 export const VerifyEmail = () => {
   const [searchParams] = useSearchParams();
@@ -49,7 +49,7 @@ export const VerifyEmail = () => {
             const response = await verifyEmail({
               codeId: parseInt(codeId, 10),
               code: code,
-              email: email,
+              email: email
             });
             if (response.status === 200) {
               setDisplay("verified");
@@ -79,7 +79,7 @@ export const VerifyEmail = () => {
           setResetObj({
             codeId: parseInt(codeId, 10),
             code: code,
-            email: email,
+            email: email
           });
           setDisplay("reset-form");
         }

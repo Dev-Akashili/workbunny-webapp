@@ -1,12 +1,12 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import { AlertObject, FormLayout } from "../layout/FormLayout";
-import { FormButton, FormInput, FormLink, FormPasswordInput } from "./Index";
 import { AUTH_ROUTES } from "@/pages/routes";
 import { getFormData, getResponseErrors } from "@/utils";
 import { useState } from "react";
 import { register as custom } from "@/api/auth";
 import { register } from "@/api/identity";
 import { useNavigate } from "react-router-dom";
+import { FormButton, FormInput, FormLink, FormPasswordInput } from "./form";
 
 export const Register = () => {
   const navigate = useNavigate();

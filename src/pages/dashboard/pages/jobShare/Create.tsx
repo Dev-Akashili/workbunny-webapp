@@ -18,6 +18,9 @@ export const CreateJobShare = () => {
       <Text fontSize="4xl" fontWeight="bold" color="#2631c3" mx="auto">
         Create a New Job Share
       </Text>
+      <form>
+        
+      </form>
     </VStack>
   );
 };

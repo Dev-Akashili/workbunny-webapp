@@ -1,11 +1,11 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
-import { AlertObject, FormLayout } from "../layout/FormLayout";
-import { FormButton, FormLink, FormPasswordInput } from "./Index";
-import { EmailVerified } from "./verifyEmail/components/EmailVerified";
-import { LinkExpired } from "./verifyEmail/components/LinkExpired";
 import { useState } from "react";
 import { getFormData } from "@/utils";
 import { resetPassword } from "@/api/auth";
+import { Box, HStack, Text } from "@chakra-ui/react";
+import { AlertObject, FormLayout } from "../layout/FormLayout";
+import { EmailVerified } from "./verifyEmail/components/EmailVerified";
+import { LinkExpired } from "./verifyEmail/components/LinkExpired";
+import { FormButton, FormLink, FormPasswordInput } from "./form";
 
 interface ResetPasswordProps {
   resetObj: { codeId: number; code: string; email: string };
@@ -28,7 +28,7 @@ export const ResetPassword = ({ resetObj }: ResetPasswordProps) => {
     if (password !== confirm) {
       setAlert({
         status: "error",
-        title: "Passwords do not match!",
+        title: "Passwords do not match!"
       });
       setIsLoading(false);
       return;
@@ -39,7 +39,7 @@ export const ResetPassword = ({ resetObj }: ResetPasswordProps) => {
         codeId: codeId,
         code: code,
         email: email,
-        newPassword: password,
+        newPassword: password
       });
       if (request.status === 200) {
         setSuccess(true);
@@ -53,7 +53,7 @@ export const ResetPassword = ({ resetObj }: ResetPasswordProps) => {
           setAlert({
             status: "error",
             title: "One or more validation errors occured",
-            errors: errors.errors,
+            errors: errors.errors
           });
         }
       }
@@ -61,7 +61,7 @@ export const ResetPassword = ({ resetObj }: ResetPasswordProps) => {
       console.warn("Password reset failed");
       setAlert({
         status: "error",
-        title: "Something went wrong! Please try again later.",
+        title: "Something went wrong! Please try again later."
       });
     }
     setIsLoading(false);

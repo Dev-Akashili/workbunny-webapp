@@ -1,5 +1,5 @@
-import { FormLayout } from "@/pages/auth/layout/FormLayout";
 import { AUTH_ROUTES } from "@/pages/routes";
+import { FormLayout } from "@/pages/auth/layout/FormLayout";
 import { Button, Image, Link, Stack } from "@chakra-ui/react";
 
 export const LinkExpired = ({

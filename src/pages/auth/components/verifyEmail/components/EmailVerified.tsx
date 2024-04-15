@@ -1,6 +1,6 @@
 import { FormLayout } from "@/pages/auth/layout/FormLayout";
 import { Box, Image, Stack } from "@chakra-ui/react";
-import { FormLink } from "../../Index";
+import { FormLink } from "../../form";
 
 export const EmailVerified = ({ name }: { name: string }) => {
   return (

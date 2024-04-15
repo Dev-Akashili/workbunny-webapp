@@ -1,5 +1,5 @@
-import { FormLayout } from "@/pages/auth/layout/FormLayout";
 import { Image } from "@chakra-ui/react";
+import { FormLayout } from "@/pages/auth/layout/FormLayout";
 
 export const EmailSent = ({ name }: { name: string | null }) => {
   return (

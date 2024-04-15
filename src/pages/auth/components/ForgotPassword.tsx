@@ -1,8 +1,8 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import { FormLayout } from "../layout/FormLayout";
-import { FormButton, FormInput, FormLink } from "./Index";
 import { getFormData } from "@/utils";
 import { useNavigate } from "react-router-dom";
+import { FormButton, FormInput, FormLink } from "./form";
 
 export const ForgotPassword = () => {
   const navigate = useNavigate();

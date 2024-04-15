@@ -14,7 +14,7 @@ import { GetHelp } from "@/pages/help/GetHelp";
 import { ROUTES } from "@/pages/routes";
 import { Analytics } from "@/pages/analytics/Analytics";
 import { Activity } from "@/pages/activity/Activity";
-import { CreateJobShare } from "@/pages/dashboard/pages/CreateJobShare";
+import { CreateJobShare } from "@/pages/dashboard/pages/jobShare";
 
 export const Root = () => {
   return (
