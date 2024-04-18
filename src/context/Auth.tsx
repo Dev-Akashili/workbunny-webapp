@@ -5,6 +5,7 @@ import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 export interface AuthContextValue {
   isAuthenticated: boolean | undefined;
   user: UserModel | null;
+  setAuthState?: any;
 }
 
 export const AuthContext = React.createContext<AuthContextValue>({
@@ -18,7 +19,7 @@ interface ProviderProps {
 
 export const AuthProvider = ({ children }: ProviderProps) => {
   const { isAuthenticated, user } = useAuthentication();
-  const [authState, setAuthState] = useState({
+  const [authState, setAuthState] = useState<any>({
     isAuthenticated,
     user
   });
@@ -28,6 +29,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   }, [isAuthenticated, user]);
 
   return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ ...authState, setAuthState }}>
+      {children}
+    </AuthContext.Provider>
   );
 };

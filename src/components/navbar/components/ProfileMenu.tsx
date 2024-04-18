@@ -15,9 +15,12 @@ import { LogOut, UserCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "@/api/identity";
 import { AUTH_ROUTES } from "@/pages/routes";
+import { useContext } from "react";
+import { AuthContext } from "@/context/Auth";
 
 export const ProfileMenu = ({ username }: { username: string | undefined }) => {
   const navigate = useNavigate();
+  const { setAuthState } = useContext(AuthContext);
   const toast = useToast({ duration: 5000, isClosable: true, position: "top" });
 
   const handleSignOut = async () => {
@@ -25,6 +28,7 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
       const request = await logout();
 
       if (request.status === 200) {
+        setAuthState({ isAuthenticated: false, user: null });
         navigate(AUTH_ROUTES.login);
         toast({
           title: "Signed out!",

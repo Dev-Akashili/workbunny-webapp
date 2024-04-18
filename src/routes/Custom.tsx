@@ -1,7 +1,6 @@
 import { Busy } from "@/components/Busy";
 import { Roles } from "@/constants";
 import { AuthContext } from "@/context/Auth";
-import { useAuthentication } from "@/helpers/hooks/useAuthentication";
 import { DefaultLayout } from "@/layout/DefaultLayout";
 import { Auth } from "@/pages/auth/Auth";
 import { Forbidden } from "@/pages/error/Forbidden";
@@ -43,7 +42,7 @@ export const AuthRoute = ({
 };
 
 export const AuthRedirect = () => {
-  const { isAuthenticated } = useAuthentication();
+  const { isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated === undefined) {
     return (

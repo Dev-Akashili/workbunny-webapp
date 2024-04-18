@@ -1,15 +1,18 @@
 import { HStack, Text, useToast } from "@chakra-ui/react";
 import { AlertObject, FormLayout } from "../layout/FormLayout";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getFormData } from "@/utils";
 import { login } from "@/api/identity";
 import { login as custom } from "@/api/auth";
 import { AUTH_ROUTES, ROUTES } from "@/pages/routes";
 import { useNavigate } from "react-router-dom";
 import { FormButton, FormInput, FormLink, FormPasswordInput } from "./form";
+import { getUser } from "@/api/user";
+import { AuthContext } from "@/context/Auth";
 
 export const LogIn = () => {
   const navigate = useNavigate();
+  const { setAuthState } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alert, setAlert] = useState<AlertObject | undefined>(undefined);
   const toast = useToast({ duration: 5000, isClosable: true, position: "top" });
@@ -23,12 +26,18 @@ export const LogIn = () => {
     try {
       const result = await login({ email, password });
       if (result.status === 200) {
-        setIsLoading(false);
-        navigate(ROUTES.home);
-        toast({
-          title: "Login successful",
-          status: "success"
-        });
+        const response = await getUser();
+        const user = await response.json();
+        if (user) {
+          setAuthState({ isAuthenticated: true, user: user });
+          setIsLoading(false);
+          navigate(ROUTES.home);
+          toast({
+            title: "Login successful",
+            status: "success"
+          });
+        } else {
+        }
       } else {
         const request = await custom({ email: email, password: password });
         const result = await request.json();
