@@ -1,11 +1,12 @@
 import { Navbar } from "../components/navbar/Navbar";
 import { Box, Flex } from "@chakra-ui/react";
-import { SidebarDesktop } from "@/components/sidebar/SidebarDesktop";
 import { Outlet } from "react-router-dom";
-import { useAuthentication } from "@/helpers/hooks/useAuthentication";
+import { useContext } from "react";
+import { AuthContext } from "@/context/Auth";
+import { SidebarDesktop } from "@/components/sidebar/SidebarDesktop";
 
 export const PageLayout = () => {
-  const { user } = useAuthentication();
+  const { user } = useContext(AuthContext);
 
   return (
     <Flex minH="100vh">

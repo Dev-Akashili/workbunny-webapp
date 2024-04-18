@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Root } from "./routes/Root";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./pages/error/ErrorFallback";
+import { AuthProvider } from "./context/Auth";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         >
           <CSSReset />
           <ErrorBoundary fallback={<ErrorFallback />}>
-            <Root />
+            <AuthProvider>
+              <Root />
+            </AuthProvider>
           </ErrorBoundary>
         </ColorModeProvider>
       </ChakraProvider>

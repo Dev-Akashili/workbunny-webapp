@@ -1,67 +1,19 @@
-import {
-  FormControl,
-  FormLabel,
-  HStack,
-  Select,
-  Text,
-  Tag,
-  TagLabel,
-  TagCloseButton
-} from "@chakra-ui/react";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import { FormMultiSelectProps } from "./FormMultiSelect";
-import { useEffect, useState } from "react";
+import { FormControl, FormLabel, Text } from "@chakra-ui/react";
 
-interface TileProps {
-  name: string;
-  onClick: () => void;
+interface FormMultiSelectTagProps extends FormMultiSelectProps {
+  options: { value: string; label: string }[];
 }
-
-const Tile = ({ name, onClick }: TileProps) => {
-  return (
-    <Tag
-      size="lg"
-      variant="subtle"
-      colorScheme="blue"
-      color="#2631c3"
-      fontWeight="bold"
-    >
-      <TagLabel>{name}</TagLabel>
-      <TagCloseButton onClick={onClick} />
-    </Tag>
-  );
-};
-
-interface FormMultiSelectTagProps extends FormMultiSelectProps {}
 
 export const FormMultiSelectTag = ({
   name,
   desc,
   label,
-  list,
-  isRequired
+  options
 }: FormMultiSelectTagProps) => {
-  const [value, setValue] = useState<string[]>([]);
-  const [options, setOptions] = useState<string[]>([]);
-  const [selected, setSelected] = useState<string[]>([]);
-
-  useEffect(() => {
-    setOptions([...list]);
-  }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const val = e.currentTarget.value;
-    if (val) {
-      setValue((prev) => [...prev, val]);
-      setSelected((prev) => [...prev, val]);
-      setOptions((prev) => prev.filter((option) => option !== val));
-    }
-  };
-
-  const handleClick = (item: string) => {
-    setSelected((prev) => prev.filter((option) => option !== item));
-    setOptions((prev) => [...prev, item]);
-    console.log(value, value.toString());
-  };
+  const animatedComponents = makeAnimated();
 
   return (
     <FormControl>
@@ -69,25 +21,41 @@ export const FormMultiSelectTag = ({
         {desc}
       </Text>
       <FormLabel>{label}</FormLabel>
-      <HStack mb={selected.length > 0 ? 3 : 0}>
-        {selected.map((item, index) => (
-          <Tile key={index} name={item} onClick={() => handleClick(item)} />
-        ))}
-      </HStack>
       <Select
         name={name}
-        value={value.toString()}
-        placeholder="Select an option"
-        border="1px solid"
-        isRequired={isRequired}
-        onChange={handleChange}
-      >
-        {options.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </Select>
+        options={options}
+        placeholder="Select options"
+        components={animatedComponents}
+        closeMenuOnSelect={false}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            borderColor: "black",
+            height: "45px"
+          }),
+          multiValue: (baseStyles) => ({
+            ...baseStyles,
+            color: "#ffff",
+            backgroundColor: "#2631c3"
+          }),
+          multiValueLabel: (baseStyles) => ({ ...baseStyles, color: "#ffff" }),
+          placeholder: (baseStyles) => ({
+            ...baseStyles,
+            color: "black"
+          }),
+          dropdownIndicator: (baseStyles) => ({
+            ...baseStyles,
+            color: "#black"
+          }),
+          indicatorSeparator: (baseStyles) => ({
+            ...baseStyles,
+            color: "#black",
+            border: "2px"
+          })
+        }}
+        isMulti
+        required
+      />
     </FormControl>
   );
 };

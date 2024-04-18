@@ -38,6 +38,23 @@ export const CreateJobShare = () => {
           name="country"
           desc="What platforms are you actively using to search?"
           label="Select one or multiple"
+          options={[
+            { value: "Japan", label: "Japan" },
+            { value: "China", label: "China" },
+            { value: "Nigeria", label: "Nigeria" },
+            { value: "United Kingdom", label: "United Kingdom" }
+          ]}
+          isRequired
+        />
+        <FormDate
+          name="start"
+          desc="When did you start searching for this job?"
+          isRequired
+        />
+        <FormMultiSelect
+          name="country"
+          desc="Where are you searching?"
+          label="Country"
           list={["Japan", "China", "Nigeria", "United Kingdom"]}
           isRequired
         />
