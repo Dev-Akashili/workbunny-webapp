@@ -12,6 +12,7 @@ export const Navbar = ({ user }: { user: UserModel | null }) => {
       boxShadow="md"
       w={{ base: "100%", md: "100%", lg: "80%" }}
       h="65px"
+      zIndex={1}
     >
       <Flex justifyContent="space-between" w="100%" p={8}>
         <SidebarMobile user={user} />
