@@ -4,7 +4,7 @@ import { BarChart, Edit, PlusCircle, Star } from "lucide-react";
 export const buttons = [
   {
     name: "Start a New Job Share",
-    link: ROUTES.dashboard.create,
+    link: ROUTES.jobshare.create,
     icon: <PlusCircle />,
     color: "green"
   },

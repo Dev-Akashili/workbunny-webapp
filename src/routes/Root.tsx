@@ -2,7 +2,7 @@ import {
   IndexRoute,
   AuthRoute,
   AuthRedirect,
-  AdminRoute,
+  AdminRoute
 } from "@/routes/Custom";
 import { NotFound } from "@/pages/error/NotFound";
 import { Admin } from "@/pages/admin/Admin";
@@ -14,7 +14,7 @@ import { GetHelp } from "@/pages/help/GetHelp";
 import { ROUTES } from "@/pages/routes";
 import { Analytics } from "@/pages/analytics/Analytics";
 import { Activity } from "@/pages/activity/Activity";
-import { CreateJobShare } from "@/pages/dashboard/pages/jobShare";
+import { JobShare, CreateJobShare } from "@/pages/jobshare";
 
 export const Root = () => {
   return (
@@ -33,12 +33,20 @@ export const Root = () => {
             </AuthRoute>
           }
         />
-        <Route path={ROUTES.dashboard.base}>
+        <Route
+          path={ROUTES.dashboard}
+          element={
+            <AuthRoute>
+              <Dashboard />
+            </AuthRoute>
+          }
+        />
+        <Route path={ROUTES.jobshare.index}>
           <Route
             index
             element={
               <AuthRoute>
-                <Dashboard />
+                <JobShare />
               </AuthRoute>
             }
           />

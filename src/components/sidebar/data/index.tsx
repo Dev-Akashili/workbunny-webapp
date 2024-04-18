@@ -28,8 +28,8 @@ export const sidebarItems: SidebarItem[] = [
   },
   {
     name: "Dashboard",
-    link: ROUTES.dashboard.base,
-    path: ROUTES.dashboard.base,
+    link: ROUTES.dashboard,
+    path: ROUTES.dashboard,
     icon: <LayoutDashboard />,
   },
   {

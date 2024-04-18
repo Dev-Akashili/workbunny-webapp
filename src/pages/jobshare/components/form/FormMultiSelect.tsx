@@ -4,7 +4,7 @@ export interface FormMultiSelectProps {
   name: string;
   desc: string;
   label: string;
-  list: string[];
+  list?: string[];
   isRequired?: boolean;
 }
 
@@ -27,7 +27,7 @@ export const FormMultiSelect = ({
         isRequired={isRequired}
         placeholder="Select an option"
       >
-        {list.map((item, index) => (
+        {list?.map((item, index) => (
           <option key={index} value={item}>
             {item}
           </option>

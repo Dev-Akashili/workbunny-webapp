@@ -10,7 +10,7 @@ export const CreateJobShare = () => {
       <Text
         as={Link}
         _hover={{ textDecor: "none" }}
-        href={ROUTES.dashboard.base}
+        href={ROUTES.dashboard}
         fontSize="md"
         fontWeight="bold"
         color="#2631c3"

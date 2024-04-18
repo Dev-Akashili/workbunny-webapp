@@ -1,3 +1,4 @@
+import { ROUTES } from "@/pages/routes";
 import { HStack, Link, Text } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -21,8 +22,15 @@ export const SidebarItem = ({
   const [isCurrentPath, setIsCurrentPath] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsCurrentPath(location.pathname.includes(path));
-  }, [isCurrentPath]);
+    const isPathMatch = location.pathname.includes(path);
+    const isJobShareIndex = location.pathname.includes(ROUTES.jobshare.index);
+
+    if (isPathMatch || (isJobShareIndex && path === ROUTES.dashboard)) {
+      setIsCurrentPath(true);
+    } else {
+      setIsCurrentPath(false);
+    }
+  }, [location.pathname, path, setIsCurrentPath]);
 
   return (
     <HStack
