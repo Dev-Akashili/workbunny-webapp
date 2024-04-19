@@ -1,12 +1,13 @@
+import { FormProps } from "@/types/form";
 import { FormControl, Input, Stack, Text } from "@chakra-ui/react";
 
-interface FormDateProps {
-  name: string;
-  desc: string;
-  isRequired?: boolean;
-}
+interface FormDateInputProps extends FormProps {}
 
-export const FormDate = ({ name, desc, isRequired }: FormDateProps) => {
+export const FormDateInput = ({
+  name,
+  desc,
+  isRequired,
+}: FormDateInputProps) => {
   return (
     <FormControl>
       <Stack>

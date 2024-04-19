@@ -1,9 +1,14 @@
+import {
+  FormDateInput,
+  FormNumberInput,
+  FormTextInput,
+  FormMultiSelect,
+  FormMultiSelectTag,
+  FormTextArea,
+} from "./components/form";
 import { ROUTES } from "@/pages/routes";
 import { Box, Link, Text, VStack } from "@chakra-ui/react";
-import { FormDate } from "./components/form/FormDate";
-import { FormMultiSelect } from "./components/form/FormMultiSelect";
-import { FormMultiSelectTag } from "./components/form/FormMultiSelectTag";
-import { FormTextArea } from "./components/form/FormTextArea";
+import { StageLayout } from "./layout/StageLayout";
 
 export const CreateJobShare = () => {
   return (
@@ -24,7 +29,7 @@ export const CreateJobShare = () => {
       </Text>
       <Box>
         <form>
-          <FormDate
+          <FormDateInput
             name="start"
             desc="When did you start searching for this job?"
             isRequired
@@ -44,26 +49,33 @@ export const CreateJobShare = () => {
               { value: "Japan", label: "Japan" },
               { value: "China", label: "China" },
               { value: "Nigeria", label: "Nigeria" },
-              { value: "United Kingdom", label: "United Kingdom" }
+              { value: "United Kingdom", label: "United Kingdom" },
             ]}
             isRequired
           />
-          <FormDate
+          <FormTextInput
             name="start"
             desc="When did you start searching for this job?"
             isRequired
           />
-          <FormMultiSelect
-            name="country"
-            desc="Where are you searching?"
-            label="Country"
-            list={["Japan", "China", "Nigeria", "United Kingdom"]}
-            isRequired
-          />
-          <FormTextArea
-            name="tip"
-            desc="Please leave some tips that have helped you"
-          />
+          <StageLayout stageName="Searching">
+            <FormNumberInput
+              name="start"
+              desc="When did you start searching for this job?"
+              isRequired
+            />
+            <FormMultiSelect
+              name="country"
+              desc="Where are you searching?"
+              label="Country"
+              list={["Japan", "China", "Nigeria", "United Kingdom"]}
+              isRequired
+            />
+            <FormTextArea
+              name="tip"
+              desc="Please leave some tips that have helped you"
+            />
+          </StageLayout>
         </form>
       </Box>
     </VStack>

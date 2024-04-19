@@ -1,20 +1,22 @@
+import { FormProps } from "@/types/form";
 import {
   FormControl,
   FormLabel,
   VStack,
   Tag,
   Text,
-  Textarea
+  Textarea,
 } from "@chakra-ui/react";
 import { ChangeEvent, useEffect, useState } from "react";
 
-interface FormTextAreaProps {
-  name: string;
-  desc: string;
-  label?: string;
-}
+interface FormTextAreaProps extends FormProps {}
 
-export const FormTextArea = ({ name, desc, label }: FormTextAreaProps) => {
+export const FormTextArea = ({
+  name,
+  desc,
+  label,
+  isRequired,
+}: FormTextAreaProps) => {
   const [wordCount, setWordCount] = useState<number>(0);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -44,6 +46,7 @@ export const FormTextArea = ({ name, desc, label }: FormTextAreaProps) => {
           placeholder="Leave a tip here"
           onChange={handleChange}
           isInvalid={wordCount >= 100}
+          isRequired={isRequired}
         />
       </FormControl>
       <Tag

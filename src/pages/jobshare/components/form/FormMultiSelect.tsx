@@ -1,11 +1,8 @@
+import { FormProps } from "@/types/form";
 import { FormControl, FormLabel, Select, Text } from "@chakra-ui/react";
 
-export interface FormMultiSelectProps {
-  name: string;
-  desc: string;
-  label: string;
+export interface FormMultiSelectProps extends FormProps {
   list?: string[];
-  isRequired?: boolean;
 }
 
 export const FormMultiSelect = ({
@@ -13,7 +10,7 @@ export const FormMultiSelect = ({
   desc,
   label,
   list,
-  isRequired
+  isRequired,
 }: FormMultiSelectProps) => {
   return (
     <FormControl>
