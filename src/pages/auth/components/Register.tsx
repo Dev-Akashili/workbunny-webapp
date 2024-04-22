@@ -7,6 +7,8 @@ import { register as custom } from "@/api/auth";
 import { register } from "@/api/identity";
 import { useNavigate } from "react-router-dom";
 import { FormButton, FormInput, FormLink, FormPasswordInput } from "./form";
+import { FormSelect } from "./form/FormSelect";
+import { countries } from "@/data/countries";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -17,18 +19,19 @@ export const Register = () => {
     e.preventDefault();
     setIsLoading(true);
     setAlert(undefined);
-    const { email, username, password, confirm } = getFormData(e, [
+    const { email, username, country, password, confirm } = getFormData(e, [
       "email",
       "username",
+      "country",
       "password",
-      "confirm"
+      "confirm",
     ]);
 
     // Make sure passwords are the same
     if (password !== confirm) {
       setAlert({
         status: "error",
-        title: "Passwords do not match!"
+        title: "Passwords do not match!",
       });
       setIsLoading(false);
       return;
@@ -38,7 +41,7 @@ export const Register = () => {
     if (/\s/g.test(username)) {
       setAlert({
         status: "error",
-        title: "Username should not have any space!"
+        title: "Username should not have any space!",
       });
       setIsLoading(false);
       return;
@@ -48,7 +51,7 @@ export const Register = () => {
     if (username.length < 2) {
       setAlert({
         status: "error",
-        title: "Username should be more than 2 characters!"
+        title: "Username should be more than 2 characters!",
       });
       setIsLoading(false);
       return;
@@ -58,19 +61,23 @@ export const Register = () => {
       const request = await register({ email: email, password: password });
 
       if (request.status === 200) {
-        const result = await custom({ email: email, username: username });
+        const result = await custom({
+          email: email,
+          country: country,
+          username: username,
+        });
         if (result.status === 200) {
           navigate(AUTH_ROUTES.verifyEmail.regiser(email));
         } else if (result.status === 400) {
           const message = await result.text();
           setAlert({
             status: "error",
-            title: message
+            title: message,
           });
         } else {
           setAlert({
             status: "error",
-            title: "Something went wrong! Please try again later."
+            title: "Something went wrong! Please try again later.",
           });
         }
       } else if (request.status === 400) {
@@ -80,7 +87,7 @@ export const Register = () => {
       } else {
         setAlert({
           status: "error",
-          title: "Something went wrong! Please try again later."
+          title: "Something went wrong! Please try again later.",
         });
       }
     } catch (error) {
@@ -97,6 +104,12 @@ export const Register = () => {
           type="email"
           label="Email"
           placeholder="Email"
+          isRequired
+        />
+        <FormSelect
+          name="country"
+          label="Country"
+          options={countries}
           isRequired
         />
         <FormInput

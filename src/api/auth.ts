@@ -19,7 +19,11 @@ export async function login(formData: { email: string; password: string }) {
     identity: false,
   });
 }
-export async function register(formData: { email: string; username: string }) {
+export async function register(formData: {
+  email: string;
+  country: string;
+  username: string;
+}) {
   return await request(fetchKeys.register, {
     method: "POST",
     headers: {

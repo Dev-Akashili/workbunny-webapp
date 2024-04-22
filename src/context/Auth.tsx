@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactNode, useEffect, useState } from "react";
 import { UserModel } from "@/types";
 import { useAuthentication } from "@/helpers/hooks/useAuthentication";
