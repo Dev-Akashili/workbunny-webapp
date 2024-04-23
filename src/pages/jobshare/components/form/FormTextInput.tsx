@@ -1,26 +1,27 @@
 import { FormProps } from "@/types/form";
-import { FormControl, Input, Stack, Text } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
-interface FormTextInputProps extends FormProps {}
+interface FormTextInputProps extends FormProps {
+  placeholder: string;
+}
 
 export const FormTextInput = ({
   name,
-  desc,
+  label,
+  placeholder,
   isRequired,
 }: FormTextInputProps) => {
   return (
     <FormControl>
-      <Stack>
-        <Text color="#2631c3" fontSize="xl" fontWeight="bold">
-          {desc}
-        </Text>
-        <Input
-          name={name}
-          type="text"
-          border="1px solid"
-          isRequired={isRequired}
-        />
-      </Stack>
+      <FormLabel fontWeight="bold">{label}</FormLabel>
+      <Input
+        name={name}
+        type="text"
+        border="1px solid"
+        placeholder={placeholder}
+        isRequired={isRequired}
+        mt={-1}
+      />
     </FormControl>
   );
 };

@@ -1,6 +1,6 @@
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { FormControl, FormLabel, Text } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 import { FormProps } from "@/types/form";
 
 interface FormMultiSelectTagProps extends FormProps {
@@ -9,7 +9,6 @@ interface FormMultiSelectTagProps extends FormProps {
 
 export const FormMultiSelectTag = ({
   name,
-  desc,
   label,
   options,
 }: FormMultiSelectTagProps) => {
@@ -17,10 +16,7 @@ export const FormMultiSelectTag = ({
 
   return (
     <FormControl>
-      <Text color="#2631c3" fontSize="xl" fontWeight="bold">
-        {desc}
-      </Text>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel fontWeight="bold">{label}</FormLabel>
       <Select
         name={name}
         options={options}

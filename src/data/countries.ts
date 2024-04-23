@@ -371,7 +371,7 @@ export const countriesAndCities = [
     ],
   },
   {
-    country: "United Kingdom",
+    country: "United States",
     cities: [
       "Alabama",
       "Alaska",

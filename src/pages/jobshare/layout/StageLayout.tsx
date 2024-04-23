@@ -12,24 +12,24 @@ import {
 import { ReactNode } from "react";
 
 interface StageLayoutProps {
-  stageName: string;
+  name: string;
   children: ReactNode | ReactNode[];
 }
 
-export const StageLayout = ({ stageName, children }: StageLayoutProps) => {
+export const StageLayout = ({ name, children }: StageLayoutProps) => {
   return (
-    <TableContainer border="2px solid #2631c3" mt={8}>
+    <TableContainer border="2px solid #2631c3" mt={5}>
       <Table>
         <Thead bgColor="blue.100">
           <Tr>
             <Th borderBottom="2px solid #2631c3">
               <Text fontSize="lg" fontWeight="bold" color="#2631c3">
-                {stageName}
+                {name}
               </Text>
             </Th>
           </Tr>
         </Thead>
-        <Tbody p={3}>
+        <Tbody>
           <Tr>
             <Td>
               <Box>{children}</Box>

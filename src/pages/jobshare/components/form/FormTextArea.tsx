@@ -1,19 +1,17 @@
-import { FormProps } from "@/types/form";
 import {
   FormControl,
   FormLabel,
   VStack,
   Tag,
-  Text,
   Textarea,
 } from "@chakra-ui/react";
+import { FormProps } from "@/types/form";
 import { ChangeEvent, useEffect, useState } from "react";
 
 interface FormTextAreaProps extends FormProps {}
 
 export const FormTextArea = ({
   name,
-  desc,
   label,
   isRequired,
 }: FormTextAreaProps) => {
@@ -35,15 +33,12 @@ export const FormTextArea = ({
   return (
     <VStack>
       <FormControl>
-        <Text color="#2631c3" fontSize="xl" fontWeight="bold">
-          {desc}
-        </Text>
         <FormLabel>{label}</FormLabel>
         <Textarea
           name={name}
           rows={8}
           border="1px solid"
-          placeholder="Leave a tip here"
+          placeholder="Please leave a tip here in 100 words or less"
           onChange={handleChange}
           isInvalid={wordCount >= 100}
           isRequired={isRequired}
