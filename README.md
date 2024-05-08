@@ -14,4 +14,4 @@ This is the repo for the client app of the workbunny web application.
 
 ## Configuration
 
-This webapp consumes the workbunny-api. Read more at: https://github.com/work-bunny/workbunny-api - to get it up and running. Once that is done, do not forget to add the localhost url to your `.env.local`.
+This webapp consumes the workbunny-api. Read more at: https://github.com/dev-akashili/workbunny-api - to get it up and running. Once that is done, do not forget to add the localhost url to your `.env.local`.
