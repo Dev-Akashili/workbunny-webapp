@@ -6,6 +6,7 @@ import { Root } from "./routes/Root";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./pages/error/ErrorFallback";
 import { AuthProvider } from "./context/Auth";
+import { SidebarProvider } from "./context/Sidebar";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -13,13 +14,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ChakraProvider>
         <ColorModeProvider
           options={{
-            useSystemColorMode: true
+            useSystemColorMode: true,
           }}
         >
           <CSSReset />
           <ErrorBoundary fallback={<ErrorFallback />}>
             <AuthProvider>
-              <Root />
+              <SidebarProvider>
+                <Root />
+              </SidebarProvider>
             </AuthProvider>
           </ErrorBoundary>
         </ColorModeProvider>

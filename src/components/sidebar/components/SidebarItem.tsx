@@ -8,6 +8,7 @@ interface SidebarItemProps {
   link: string;
   path: string;
   icon: ReactNode;
+  collapsed: boolean;
   mobile?: boolean;
 }
 
@@ -16,7 +17,8 @@ export const SidebarItem = ({
   link,
   path,
   icon,
-  mobile = false
+  collapsed,
+  mobile = false,
 }: SidebarItemProps) => {
   const location = useLocation();
   const [isCurrentPath, setIsCurrentPath] = useState<boolean>(false);
@@ -34,23 +36,24 @@ export const SidebarItem = ({
 
   return (
     <HStack
+      p={3}
+      my={1}
+      spacing={5}
       as={Link}
       href={link}
+      justifyContent={collapsed?"center":""}
       _hover={{
         textDecor: "none",
         bg: isCurrentPath ? "" : "gray.200",
-        borderRadius: mobile ? "8px" : ""
+        borderRadius: mobile ? "8px" : "",
       }}
-      spacing={5}
-      p={3}
-      my={1}
       color={isCurrentPath ? "#2631C3" : "gray.800"}
       borderLeft={isCurrentPath ? (!mobile ? "5px solid #2631C3" : "") : ""}
       bg={isCurrentPath ? "#e8f0fc" : ""}
       borderRadius={isCurrentPath ? (mobile ? "8px" : "") : ""}
     >
       {icon}
-      <Text>{name}</Text>
+      <Text display={collapsed ? "none" : "inline"}>{name}</Text>
     </HStack>
   );
 };

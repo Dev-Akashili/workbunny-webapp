@@ -1,13 +1,17 @@
 import { Helmet } from "../Helmet";
 import { UserModel } from "@/types";
 import { sidebarItems } from "./data";
-import { Box, VStack } from "@chakra-ui/react";
+import { Box, Flex, VStack } from "@chakra-ui/react";
 import { SidebarItem } from "./components/SidebarItem";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useSidebar } from "@/context/Index";
 
 export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
+  const { isCollapsed, setCollapsed } = useSidebar();
+
   return (
     <VStack
-      w="20%"
+      w={isCollapsed ? "5%" : "20%"}
       h="100vh"
       borderRight="2px solid #2631c3"
       position="fixed"
@@ -18,10 +22,36 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
       spacing={5}
       display={{ base: "none", md: "none", lg: "inline" }}
     >
-      <Box ml={2}>
-        <Helmet />
-      </Box>
-      <Box overflow="auto" w="100%">
+      {isCollapsed ? (
+        <Flex
+          w="70%"
+          m="15px auto"
+          color="#2631c3"
+          borderRadius={5}
+          border="1.5px solid #2631c3"
+          justifyContent="center"
+          _hover={{ cursor: "pointer", bgColor: "gray.200" }}
+          onClick={() => setCollapsed(!isCollapsed)}
+        >
+          <ChevronRight size="40px" />
+        </Flex>
+      ) : (
+        <Flex justifyContent="space-between" alignItems="center">
+          <Helmet />
+          <Box
+            mr="10px"
+            color="#2631c3"
+            borderRadius={5}
+            border="1.5px solid #2631c3"
+            _hover={{ cursor: "pointer", bgColor: "gray.200" }}
+            onClick={() => setCollapsed(!isCollapsed)}
+          >
+            <ChevronLeft size="40px" />
+          </Box>
+        </Flex>
+      )}
+
+      <Box overflow="auto" w="100%" mt={isCollapsed ? "20px" : "0"}>
         {sidebarItems.map((item, index) =>
           item.condition && !item.condition(user) ? null : (
             <SidebarItem
@@ -30,6 +60,7 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
               link={item.link}
               path={item.path}
               icon={item.icon}
+              collapsed={isCollapsed}
             />
           )
         )}
