@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { LogOut, UserCog } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -32,19 +32,19 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
         navigate(AUTH_ROUTES.login);
         toast({
           title: "Signed out!",
-          status: "success"
+          status: "success",
         });
       } else {
         toast({
           title: "Something went wrong!",
-          status: "error"
+          status: "error",
         });
       }
     } catch (error) {
       console.warn("Sign Out failed!");
       toast({
         title: "Network error!",
-        status: "error"
+        status: "error",
       });
     }
   };
@@ -65,11 +65,22 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
       <MenuList>
         <MenuGroup title="My Account" fontSize="sm">
           <MenuDivider />
-          <MenuItem icon={<UserCog />} onClick={handleSignOut} fontSize="sm">
+          <MenuItem
+            icon={<UserCog />}
+            onClick={handleSignOut}
+            fontSize="sm"
+            h="100%"
+            _hover={{ color: "#2631C3" }}
+          >
             Profile Settings
           </MenuItem>
           <MenuDivider />
-          <MenuItem icon={<LogOut />} onClick={handleSignOut} fontSize="sm">
+          <MenuItem
+            icon={<LogOut />}
+            onClick={handleSignOut}
+            fontSize="sm"
+            _hover={{ color: "#2631C3" }}
+          >
             Sign out
           </MenuItem>
         </MenuGroup>
