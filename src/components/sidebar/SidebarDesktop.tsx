@@ -36,7 +36,7 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
           <ChevronRight size="40px" />
         </Flex>
       ) : (
-        <Flex justifyContent="space-between" alignItems="center">
+        <Flex justifyContent="space-between" alignItems="center" mt={3}>
           <Helmet />
           <Box
             mr="10px"
@@ -51,7 +51,7 @@ export const SidebarDesktop = ({ user }: { user: UserModel | null }) => {
         </Flex>
       )}
 
-      <Box overflow="auto" w="100%" mt={isCollapsed ? "20px" : "0"}>
+      <Box overflow="auto" w="100%" mt={isCollapsed?"20px":"10px"}>
         {sidebarItems.map((item, index) =>
           item.condition && !item.condition(user) ? null : (
             <SidebarItem

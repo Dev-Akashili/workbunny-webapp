@@ -1,5 +1,7 @@
-import { Button, Flex, Link, Text, VStack } from "@chakra-ui/react";
+import { ROUTES } from "@/pages/routes";
+import { Button, Flex, Text, VStack } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface ErrorPageProps {
   icon?: ReactNode;
@@ -14,7 +16,7 @@ export const ErrorPage = ({
   status,
   title,
   description,
-  button = true
+  button = true,
 }: ErrorPageProps) => {
   return (
     <Flex height="65vh" justifyContent="center" alignItems="center">
@@ -32,15 +34,15 @@ export const ErrorPage = ({
           {description}
         </Text>
         {button && (
-          <Button
-            as={Link}
-            href="/home"
-            color="#fff"
-            bgColor="#2631c3"
-            _hover={{ textDecoration: "none", bgColor: "#3c47e5" }}
-          >
-            Back To Home
-          </Button>
+          <Link to={ROUTES.home}>
+            <Button
+              color="#fff"
+              bgColor="#2631c3"
+              _hover={{ textDecoration: "none", bgColor: "#3c47e5" }}
+            >
+              Back To Home
+            </Button>
+          </Link>
         )}
       </VStack>
     </Flex>

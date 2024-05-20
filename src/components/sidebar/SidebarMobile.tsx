@@ -45,6 +45,7 @@ export const SidebarMobile = ({ user }: { user: UserModel | null }) => {
                     link={item.link}
                     path={item.path}
                     icon={item.icon}
+                    onClick={onClose}
                     mobile
                   />
                 )

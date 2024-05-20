@@ -1,14 +1,15 @@
 import { ROUTES } from "@/pages/routes";
-import { HStack, Link, Text } from "@chakra-ui/react";
+import { HStack, Text } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface SidebarItemProps {
   name: string;
   link: string;
   path: string;
   icon: ReactNode;
-  collapsed: boolean;
+  collapsed?: boolean;
+  onClick?: () => void;
   mobile?: boolean;
 }
 
@@ -18,6 +19,7 @@ export const SidebarItem = ({
   path,
   icon,
   collapsed,
+  onClick,
   mobile = false,
 }: SidebarItemProps) => {
   const location = useLocation();
@@ -35,25 +37,25 @@ export const SidebarItem = ({
   }, [location.pathname, path, setIsCurrentPath]);
 
   return (
-    <HStack
-      p={3}
-      my={1}
-      spacing={5}
-      as={Link}
-      href={link}
-      justifyContent={collapsed?"center":""}
-      _hover={{
-        textDecor: "none",
-        bg: isCurrentPath ? "" : "gray.200",
-        borderRadius: mobile ? "8px" : "",
-      }}
-      color={isCurrentPath ? "#2631C3" : "gray.800"}
-      borderLeft={isCurrentPath ? (!mobile ? "5px solid #2631C3" : "") : ""}
-      bg={isCurrentPath ? "#e8f0fc" : ""}
-      borderRadius={isCurrentPath ? (mobile ? "8px" : "") : ""}
-    >
-      {icon}
-      <Text display={collapsed ? "none" : "inline"}>{name}</Text>
-    </HStack>
+    <Link to={link} onClick={onClick}>
+      <HStack
+        p={3}
+        my={1}
+        spacing={5}
+        justifyContent={collapsed ? "center" : ""}
+        _hover={{
+          textDecor: "none",
+          bg: isCurrentPath ? "" : "gray.200",
+          borderRadius: mobile ? "8px" : "",
+        }}
+        color={isCurrentPath ? "#2631C3" : "gray.800"}
+        borderLeft={isCurrentPath ? (!mobile ? "5px solid #2631C3" : "") : ""}
+        bg={isCurrentPath ? "#e8f0fc" : ""}
+        borderRadius={isCurrentPath ? (mobile ? "8px" : "") : ""}
+      >
+        {icon}
+        <Text display={collapsed ? "none" : "inline"}>{name}</Text>
+      </HStack>
+    </Link>
   );
 };

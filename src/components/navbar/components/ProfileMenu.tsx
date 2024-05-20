@@ -56,7 +56,7 @@ export const ProfileMenu = ({ username }: { username: string | undefined }) => {
           <Text>{username}</Text>
           <Avatar
             name={username?.slice(0, 1) + " " + username?.slice(1)}
-            border="2px solid #2631c3"
+            border="3px solid #2631c3"
             size="sm"
             color="#ffff"
           />

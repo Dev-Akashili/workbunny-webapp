@@ -1,6 +1,7 @@
 import { AUTH_ROUTES } from "@/pages/routes";
 import { FormLayout } from "@/pages/auth/layout/FormLayout";
-import { Button, Image, Link, Stack } from "@chakra-ui/react";
+import { Button, Image, Stack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const LinkExpired = ({
   email,
@@ -19,24 +20,25 @@ export const LinkExpired = ({
           src="https://img.icons8.com/ios/250/F34831/circled-x.png"
           alt="error"
         />
-        <Button
-          w="100%"
-          color="white"
-          backgroundColor="#2631c3"
-          _hover={{
-            bgColor: "#3c47e5",
-            textDecor: "none",
-          }}
-          as={Link}
-          size="md"
-          href={
+        <Link
+          to={
             name === "register"
               ? AUTH_ROUTES.verifyEmail.regiser(email)
               : AUTH_ROUTES.forgotPasword
           }
         >
-          Send new verification link
-        </Button>
+          <Button
+            w="100%"
+            color="white"
+            backgroundColor="#2631c3"
+            _hover={{
+              bgColor: "#3c47e5",
+            }}
+            size="md"
+          >
+            Send new verification link
+          </Button>
+        </Link>
       </Stack>
     </FormLayout>
   );

@@ -28,9 +28,9 @@ export const Root = () => {
         <Route
           path={ROUTES.home}
           element={
-            <AuthRoute>
+            // <AuthRoute>
               <Home />
-            </AuthRoute>
+            // </AuthRoute>
           }
         />
         <Route

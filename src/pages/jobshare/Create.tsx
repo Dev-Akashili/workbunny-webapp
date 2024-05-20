@@ -1,24 +1,21 @@
 import { useState } from "react";
 import { ROUTES } from "@/pages/routes";
 import { Base, Searching } from "./components/stages";
-import { Box, Button, Link, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, VStack } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const CreateJobShare = () => {
   const [stage, setStage] = useState<string | undefined>(undefined);
 
   return (
     <VStack p={3}>
-      <Text
-        as={Link}
-        _hover={{ textDecor: "none" }}
-        href={ROUTES.dashboard}
-        fontSize="md"
-        fontWeight="bold"
-        color="#2631c3"
-        mr="auto"
-      >
-        {"< Go Back"}
-      </Text>
+      <Box mr="auto">
+        <Link to={ROUTES.dashboard}>
+          <Text fontSize="md" fontWeight="bold" color="#2631c3">
+            {"< Go Back"}
+          </Text>
+        </Link>
+      </Box>
       <Text fontSize="3xl" fontWeight="bold" color="#2631c3" mx="auto">
         Create a New Job Share
       </Text>
