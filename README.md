@@ -1,6 +1,6 @@
 # WorkBunny Web App
 
-This is the repo for the client app of the workbunny web application.
+This is the repo for the client app of the workbunny web application. Work Bunny is a web application being built to connect job seekers across Europe, America and Africa, in different stages of their job search (searching, interviewing and hired), to share and receive useful insight, and ultimately help them land their dream job.
 
 ## Getting started
 
